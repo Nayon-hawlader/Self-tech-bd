@@ -1,0 +1,87 @@
+.container{
+    border: 1px solid lightgray;
+}
+
+.main-row{
+    margin: 20px 10px;
+   
+}
+
+.row-one{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid lightgrey;
+}
+
+.row-one .col-md-2{
+    border-right: 2px solid lightgrey;
+    height: 50px;
+    margin-top: 12px;
+}
+.row-one .my-col p{
+    padding: 0;
+    margin: 0;
+}
+.row-one .memo-head-text{
+    padding: 12px 0px;
+}
+
+.row-two .col-md-4{
+    padding-top: 10px;
+}
+.row-two .col-md-4 p{
+    margin-bottom: 10px;
+}
+
+.col-md-4 img{
+    width: 190px;
+    height: 190px;
+    padding: 5px;
+    border: 1px solid lightgrey;
+}
+
+
+.row-three{
+    padding: 5px 0px;
+    background-color: #d3d3d338;
+}
+.Subtotal-one .col-md-12{
+    border-bottom: 1px dashed #6e6e6e38;
+    border-top: 1px dashed #6e6e6e38;
+    border-left: 1px dashed #6e6e6e38;
+    margin: 2px 0px;
+}
+.Subtotal-two .col-md-12{
+    border-bottom: 1px dashed #6e6e6e38;
+    border-top: 1px dashed #6e6e6e38;
+    border-right: 1px dashed #6e6e6e38;
+    margin: 2px 0px;
+}
+
+.row-four {
+    border: 1px solid #6e6e6e38;
+    margin: 5px -15px;
+}
+.row-four p{
+    padding: 0px;
+    margin: 0px;
+}
+
+.row-five .col-4 p, .row-five .col-3 p{
+    padding-top: 40px;
+}
+.row-six{
+    
+    border-top: 1px solid lightgray;
+}
+.row-six .col-md-12{
+    margin: 0px;
+    padding: 0px;
+}
+.row-six p{
+    padding: 0px 15px;
+}
+.row-six p:first-child{
+    padding: 0px 15px;
+    margin-bottom: 0px;
+}

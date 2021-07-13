@@ -1,0 +1,622 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>Single Product</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="OneTech shop project">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/product_styles.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/product_responsive.css' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+
+
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="top_bar">
+        <div class="container">
+            <div class="row">
+                <div class="my_col">
+                     <div class="top_bar_contact_item">
+                            <div class="top_bar_icon"><img src="{% static 'images/phone.png' %}" alt=""></div>+8801733493563
+                        </div>
+                </div>
+                <div class="my_col">
+                    <div class="top_bar_contact_item">
+                        <div class="top_bar_icon"><img src="{% static 'images/mail.png' %}" alt=""></div><a
+                            href="#"><span
+                                class="__cf_email__"
+                                data-cfemail="">Nayonhawlader.bd@gmail.com</span></a>
+                        </div>
+                </div>
+                <div class="my_col">
+                    <div class="top_bar_content ml-auto">
+                    <div class="top_bar_menu">
+                        <ul class="standard_dropdown top_bar_dropdown">
+                            <li>
+                                <a href="#">English<i class="fas fa-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="#">Italian</a></li>
+                                    <li><a href="#">Spanish</a></li>
+                                    <li><a href="#">Japanese</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="#">EUR Euro</a></li>
+                                    <li><a href="#">GBP British Pound</a></li>
+                                    <li><a href="#">JPY Japanese Yen</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="top_bar_user">
+                        <div class="user_icon">                      
+    
+                            {% for users in users %}
+                              <a href="{% url 'userprofile' %}"><img class="user_main" src="{{users.image.url}}" alt="">     </a>                              
+                            {% empty %}
+                                <img class="user_temp"  src="{% static 'images/user.svg' %}" alt="">  
+                            {% endfor %}
+                                
+                           
+                        </div>
+                        <div class="user_box">
+                        {% if user.id is not None %}                        
+                        <a href="{% url 'userprofile' %}" >hi {{request.user.username}}</a>
+                        <a href="{% url 'user_logout' %}" >Logout</a>
+                        <a href="{% url 'OrderCart' %}">Checkout</a>
+                        {% else %}                              
+                        <a href="{% url 'user_login' %}" >SignIn/SignUp</a>
+                        <a href="{% url 'user_register' %}" >Register</a>
+
+                        {% endif %}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="header_main">
+        
+        <div class="container">
+            {% if messages %} {% for message in messages %}
+               <div class="alert alert-{{message.tags}}" role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}       
+            {% endif %}
+            <div class="row">
+
+                <div class="col-lg-2 col-sm-3 col-3 order-1">
+                    <div class="logo_container">
+                        <div class="logo"><a href="{% url 'index' %}">OneTech</a></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                    <div class="header_search">
+                        <div class="header_search_content">
+                            <div class="header_search_form_container">
+                                <form class="header_search_form clearfix" method="GET" action="/search" >
+                                    <input type="search" name="search" class="header_search_input"
+                                        placeholder="Search for products...">
+                                    <div class="custom_dropdown">
+                                        <div class="custom_dropdown_list">
+                                            <span class="custom_dropdown_placeholder clc">All Categories</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                            <ul class="custom_list clc">
+                                                <li><a class="clc" href="#">All Categories</a></li>
+                                                <li><a class="clc" href="#">Computers</a></li>
+                                                <li><a class="clc" href="#">Laptops</a></li>
+                                                <li><a class="clc" href="#">Cameras</a></li>
+                                                <li><a class="clc" href="#">Hardware</a></li>
+                                                <li><a class="clc" href="#">Smartphones</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="header_search_button trans_300"
+                                        value="Submit"><img src="{% static 'images/search.png' %}" alt=""></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                    <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                        <div class="wishlist d-flex flex-row align-items-center justify-content-end">
+                            <div class="wishlist_icon"><img src="{% static 'images/heart.png' %}" alt=""></div>
+                            <div class="wishlist_content">
+                                <div class="wishlist_text"><a href="#">Wishlist</a></div>
+                                <div class="wishlist_count">115</div>
+                            </div>
+                        </div>
+                        
+                        <div class="cart">
+                            <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                <div class="cart_icon">
+                                  <a href="{% url 'cart_details' %}"><img src="{% static 'images/cart.png' %}" alt=""></a>  
+                                    {% if user.id is not None %}                                        
+                                            <div class="cart_count"><span>{{total_product}}</span></div>                                          
+                                        {% else %}
+                                        <div class="cart_count"><span>0</span></div>
+                                    {% endif %}
+                                </div>
+                                <div class="cart_content">
+                                    {% if user.id is not None %}     
+                                    <div class="cart_text"><a href="{% url 'cart_details' %}">Cart</a></div>
+                                    {% else %}
+                                    <div class="cart_text"><a href="#">Cart</a></div>
+                                    {% endif %}
+ 
+                                    {% if user.id is not None %}     
+                                    <div class="cart_price">{{total_amount}}</div>
+                                    {% else %}
+                                    <div class="cart_price">$0</div>
+                                    {% endif %}
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="main_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="main_nav_content d-flex flex-row">
+
+                        <div class="cat_menu_container">
+                            <div
+                                class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+                                <div class="cat_burger"><span></span><span></span><span></span></div>
+                                <div class="cat_menu_text">categories</div>
+                            </div>
+                            <ul class="cat_menu">
+                                <li><a href="#">Computers & Laptops <i
+                                            class="fas fa-chevron-right ml-auto"></i></a></li>
+                                <li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
+                                <li class="hassubs">
+                                    <a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
+                                    <ul>
+                                        
+                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a>
+                                </li>
+                                <li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
+                                <li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
+                                <li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
+                                <li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a>
+                                </li>
+                                <li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="main_nav_menu ml-auto">
+                            <ul class="standard_dropdown main_nav_dropdown">
+                                <li><a href="{% url 'index' %}">Home<i class="fas fa-chevron-down"></i></a></li>
+                                <li class="hassubs">
+                                    <a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                            <ul>
+                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                </li>
+                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                </li>
+                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li class="hassubs">
+                                    <a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                            <ul>
+                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                </li>
+                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                </li>
+                                                <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li class="hassubs">
+                                    <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
+                                    <ul>
+                                        <li><a href="{% url 'Shop' %}">Shop<i class="fas fa-chevron-down"></i></a></li>
+                                       
+                                        <li><a href="{% url 'Blog' %}">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                        
+                
+                                        <li><a href="{% url 'cart_details' %}">Cart<i class="fas fa-chevron-down"></i></a></li>
+                                        <li><a href="{% url 'Contact' %}">Contact<i
+                                                    class="fas fa-chevron-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{% url 'Blog' %}">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{% url 'Contact' %}">Contact<i class="fas fa-chevron-down"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="menu_trigger_container ml-auto">
+                            <div  class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+                                <div class="menu_burger">
+                                    <div class="menu_trigger_text">menu</div>
+                                    <div class="cat_burger menu_burger_inner">
+                                        <span></span><span></span><span></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page_menu">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="page_menu_content">
+                        <div class="page_menu_search">
+                            <form class="header_search_form clearfix" method="GET" action="/search" >
+                                <input type="search" name="search" class="header_search_input"
+                                    placeholder="Search for products...">
+                                    <button type="submit" class="header_search_button trans_300"
+                                    value="Submit"><img src="{% static 'images/search.png' %}" alt=""></button>    
+                            </form>
+                        </div>
+                        <ul class="page_menu_nav">
+                            <li class="page_menu_item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="page_menu_item has-children">
+                                <a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
+                                <ul class="page_menu_selection">
+                                    <li><a href="#">Super Deals</a></li>                                    
+                                    <li><a href="#">Menu Item</a></li>
+                                    <li><a href="#">Menu Item</a></li>
+                                    <li><a href="#">Menu Item</a></li>
+                                </ul>
+                            </li>
+                            <li class="page_menu_item"><a href="{% url 'cart_details' %}">Cart</a></li>                           
+                            <li class="page_menu_item"><a href="{% url 'Shop' %}">Shop</a></li>                           
+                            <li class="page_menu_item"><a href="{% url 'Blog' %}">blog</a></li>
+                            <li class="page_menu_item"><a href="{% url 'Contact' %}">contact</a></li>
+                                                         
+                            {% if user.id is not None %}                                    
+                            <li class="page_menu_item"><a href="{% url 'userprofile' %}" >hi {{request.user.username}}</a></li>
+                            <li class="page_menu_item"><a href="{% url 'user_logout' %}">Logout</a></li>
+                            <li class="page_menu_item"><a href="{% url 'OrderCart' %}">Checkout</a></li>
+                            {% else %}                              
+                            <li class="page_menu_item"><a href="{% url 'user_login' %}" >SignIn/SignUp</a></li>
+                            <li class="page_menu_item"><a href="{% url 'user_register' %}" >Register</a></li>
+                            {% endif %}
+                               
+                           
+                        </ul>
+                        <div class="menu_contact">
+                            <div class="menu_contact_item">
+                                <div class="menu_contact_icon"><img src="{% static 'images/phone_white.png' %}" alt=""></div>
+                                +8801733493563
+                            </div>
+                            <div class="menu_contact_item">
+                                <div class="menu_contact_icon"><img src="{% static 'images/mail_white.png' %}" alt=""></div><a
+                                    href=""><span
+                                        class="__cf_email__"
+                                        data-cfemail="f39592808780929f9680b3949e929a9fdd909c9e">nayonhawlader.bd@gmail.com</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+  {% block midcontent %}
+    
+  <div class="super_container">  
+
+    <div class="single_product">
+     
+        <div class="container">
+        <div class="row" id="my_row_id">
+
+          <div class="col-lg-2 order-lg-1 order-2">
+            <ul class="image_list">
+            <li data-image="{{single_products.product_slider_photo_color_merun.url}}"><img src="{{single_products.product_slider_photo_color_merun.url}}" alt=""></li>
+            <li data-image="{{single_products.product_slider_photo_color_black.url}}"><img src="{{single_products.product_slider_photo_color_black.url}}" alt=""></li>
+            <li data-image="{{single_products.product_slider_photo_color_silver.url}}"><img src="{{single_products.product_slider_photo_color_silver.url}}" alt=""></li>
+            </ul>
+            </div>
+            
+            <div class="col-lg-5 order-lg-2 order-1">
+            <div class="image_selected"><img src="{{single_products.product_photo_main.url}}" alt=""></div>
+            </div>
+          <div class="col-lg-5 order-3">
+            <div class="product_description">
+              <div class="product_category">{{single_products.product_category}}</div>
+              <div class="product_name">{{single_products.brand_name}}</div>
+              <div class="product-del">
+                <div class="product_price">
+                  <h1>${{single_products.current_price}}</h1>
+                </div>
+                <div class="product_fav"><i class="fas fa-heart"></i></div>
+              </div>        
+              {% if single_products.average_review == 5.0 %}   
+              <div class="rating_r rating_r_5 bestsellers_rating">         
+              <i></i><i></i><i></i><i></i><i></i>           
+              </div>
+            {% endif %}
+            {% if single_products.average_review == 4 %}   
+              <div class="rating_r rating_r_4 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>          
+              </div>
+            {% endif %}
+            {% if single_products.average_review == 3.0 %}   
+              <div class="rating_r rating_r_3 bestsellers_rating">         
+               <i></i><i></i><i></i><i></i><i></i>         
+              </div>
+            {% endif %}
+            {% if single_products.average_review == 2.0 %}   
+              <div class="rating_r rating_r_2 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>         
+              </div>
+            {% endif %}
+            {% if single_products.average_review == 1.0 %}   
+              <div class="rating_r rating_r_1 bestsellers_rating">         
+              <i></i><i></i><i></i><i></i><i></i>          
+              </div>
+            {% endif %}
+            {% if single_products.average_review == 0.0 %}   
+              <div class="rating_r rating_r_0 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>     
+              </div>
+            {% endif %}
+            <p>({{single_products.total_review}})</p>
+            <div class="review-item-box d-flex">
+            <li class="review-item"><a href="#reviews"><i class="fab fa-readme"></i>Read Review</a></li>
+            <li class="review-item"><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pen"></i> Write Review</a></li>
+           
+            </div>
+         
+              <div class="product_text">
+                <p>{{single_products.product_description}}</p>
+              </div>
+     
+              <div class="order_info d-flex flex-row">         
+                  <div class="my-clearfix">
+                    <form action="{% url 'Add_to_Shoping_cart_form' id=single_products.id %}" method="POST">
+                      {% csrf_token %}   
+                      <div class="select-color">
+                        <h3>Choose Your Color</h3>
+                        {% block color %}
+                          {{colors.color}}
+                        {% endblock color %}               
+                      </div>          
+                    <div class="btn-clr-container">                          
+                    <div class="cart-plus-minus clearfix">  
+                        <div class="quantity">                             
+                          <span>Quantity: </span>
+                            <input class="cart-plus-minus-box" value="1"
+                                min="1" max="10"
+                                type="number" name="quantity">          
+                        </div>
+                    </div>
+                    <div class="button_container">
+                       <button class="add-to-cart button cart_button" type="submit">Add to cart</button>
+                    </div>
+                  </div> 
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row my-row">
+      <div class="col-12">
+      <div class="reviews" id="reviews">    
+          <ul class="nav nav-pills" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+            </li>
+          </ul>  
+        </div> 
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"><!-- Button trigger modal -->
+            
+            <div class="review-view-here">              
+              {% for p in  comment_show %}
+              <div class="comment-review">
+                  <span>Rating</span>
+                  <ul class="rating">
+                    {% if p.rate == 5.0 %}   
+              <div class="rating_r rating_r_5 bestsellers_rating">         
+              <i></i><i></i><i></i><i></i><i></i>           
+              </div>
+            {% endif %}
+            {% if p.rate == 4.0 %}   
+              <div class="rating_r rating_r_4 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>          
+              </div>
+            {% endif %}
+            {% if p.rate == 3.0 %}   
+              <div class="rating_r rating_r_3 bestsellers_rating">         
+               <i></i><i></i><i></i><i></i><i></i>         
+              </div>
+            {% endif %}
+            {% if p.rate == 2.0 %}   
+              <div class="rating_r rating_r_2 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>         
+              </div>
+            {% endif %}
+            {% if p.rate == 1.0 %}   
+              <div class="rating_r rating_r_1 bestsellers_rating">         
+              <i></i><i></i><i></i><i></i><i></i>          
+              </div>
+            {% endif %}
+            {% if p.rate == 0.0 %}   
+              <div class="rating_r rating_r_0 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>     
+              </div>
+            {% endif %}
+                  </ul>
+              </div>
+              <div class="comment-author-infos pt-25">
+                  <span>{{p.user.username}}</span>
+                  <em>{{p.created_at}}</em>
+              </div>
+              <div class="comment-details">
+                  <h4 class="title-block">{{p.subject}}</h4>
+                  <p>{{p.comment}}</p>
+              </div>
+               {% empty %} 
+               <h4 class="title-block">This item has no reviews...</h4>                 
+              {% endfor %}
+          
+              </div>
+            
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"><!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Write your review
+                  </button>
+                  
+                  </div>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                     
+                      <form action="{% url 'comment_add'  id=single_products.id %}" method="POST">
+                        {% csrf_token %}
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Model title<input class="d-none" type="text" name="brand_name" value="{{single_products.brand_name}}"></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="rating">
+                                <h2>Your Rating Panel</h2>                 
+                                <div class="feedback-input">
+                                  <p class="your-opinion">
+                                      <label>Your Rating</label>
+                                      <span>
+                                          <select class="star-rating" name="rate">
+                                              <option value="1" name="rate">1
+                                              </option>
+                                              <option value="2" name="rate">2
+                                              </option>
+                                              <option value="3" name="rate">3
+                                              </option>
+                                              <option value="4" name="rate">4
+                                              </option>
+                                              <option value="5" name="rate">5
+                                              </option>
+                                          </select>
+                                      </span>
+                                  </p>
+                                  <p class="feedback-form-author">
+                                      <label for="author">Subject<span
+                                              class="required"></span>
+                                      </label>
+                                      <input id="author" name="subject" value=""
+                                          size="30" aria-required="true" type="text">
+                                  </p>
+                                  <p class="feedback-form">
+                                      <label for="feedback">Your Review</label>
+                                      <textarea id="feedback" name="comment"
+                                          cols="38" rows="2"
+                                          aria-required="true"></textarea>
+                                  </p>  
+                              </div>                  
+                              </div>
+                            </div>
+                            <div class="modal-footer">         
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              {% if user.id is not Nones %}
+                              <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+                              {% else %}
+                              <h6>You should login first</h6>
+                              {% endif %}
+          
+                            </div>
+                          </div>
+                       <form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+        </div>
+      </div>
+    </div>
+  </div>  
+  </div>
+  {% endblock midcontent %}
+  {% block slider %}
+  {% include "recent_view.html" %}
+  {% endblock slider %} 
+
+    {% block footer %}
+    {% include "footer.html" %}
+    {% endblock footer %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>  
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/TweenMax.min.js' %}"></script>
+    <script src="{% static 'js/TimelineMax.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+
+  <script src="{% static 'js/product_custom.js' %}"></script>
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+
+</body>
+
+</html>

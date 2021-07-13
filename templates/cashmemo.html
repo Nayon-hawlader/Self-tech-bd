@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cashmemo</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Cashmemo.css' %}">
+</head>
+<body>
+    <div class="cashmemo-container">        
+        {% for cashmemo_two in cashmemo_two %}    
+            <div class="main-row">
+                <div class="container">
+                    <div class="row row-one">
+                        <div class="my-col col-md-2"><h1>OneTech</h1></div>
+                        <div class="my-col col-md-7">
+                            <div class="memo-head-text">
+                                <p>MyTech.com 2/1/E,  Rupaloy, Barishal Sadar Barisal.</p>
+                                <p>Phone:01733493563. Email:nayonhawlader.bd@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="my-col col-md-3">
+                            <div class="memo-head-text">
+                                <p>Invoice ID : # <b>{{cashmemo_two.code}}</b></p>
+                                <p>{{cashmemo_two.created_at}}({{request.user.username}})</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-two">
+                        <div class="col-md-4">
+                            <p>Order Info : </p>
+                            <p>Order ID : <b> {{cashmemo_two.code}}</b></p>
+                            <p>Placed : {{cashmemo_two.created_at}}</p>
+                            <p>Payment Status : <b>{{cashmemo_two.status}}</b> </p>
+                            <p>Total Product : <b>{{cashmemo_two.quantity}} Items</b> </p>
+                            <p>Delivery : <b>Sundarban courier</b> </p>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{ cashmemo_two.get_image }}">
+                        </div>
+                                
+                            <div class="col-md-4">
+                                <p>Delivery Address :</p>
+                                <p>Name : <b>{{cashmemo_two.user}}</b> </p>
+                                <p>Address : {{cashmemo_two.user_address}}</p>
+                                <p>Phone : <b>+880{{cashmemo_two.phone}}</b></p>
+                                <p>Email : {{cashmemo_two.email}}</p>
+                                <p>Order Count : <b>{{cashmemo_two.quantity}} Items</b> </p>
+                            </div>
+                       
+                    </div>
+                    <div class="row row-three">
+                        <div class="col-1">SI</div>
+                        <div class="col-6">Product</div>
+                        <div class="col-1">Quantity</div>
+                        <div class="col-2">Unit Price</div>
+                        <div class="col-2" style="text-align: right; ">Total Price</div>
+                    </div>
+                    <div class="row row-four">
+                        <div class="col-1">1</div>
+                        <div class="col-6"><p>{{cashmemo_two.brand_name}}</p> </div>
+                        <div class="col-1"><p>{{cashmemo_two.quantity}}</p> </div>     
+                        <div class="col-2"><p>{{cashmemo_two.price}}</p> </div>
+                        <div class="col-2" style="text-align: right; "><p>{{cashmemo_two.amount}}</p> </div>
+                    </div>
+                    <div class="row row-five">                            
+                        <div class="col-1"></div>
+                        {% if cashmemo_two.gift == True %}
+                        <div class="col-4" style="padding-top: 10px;"><p>“So many books, so little time.”</p> </div>                            
+                        <div class="col-3" style="padding-top: 10px;"><p>― Frank Zappa</p> </div> 
+                        {% else %}
+                        <div class="col-4"><p>“So many books, so little time.”</p> </div>                            
+                        <div class="col-3"><p>― Frank Zappa</p> </div>                                                                    
+                        {% endif %}                                           
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row Subtotal-one" >
+                                        <div class="col-md-12">Subtotal : </div>
+                                        <div class="col-md-12">Shipping :</div>
+                                        {% if cashmemo_two.gift == True %}
+                                        <div class="col-md-12">Gift Wrap :</div>                                                              
+                                        {% endif %}                               
+                                        <div class="col-md-12" style="background-color: #d3d3d31f;">Total</div>
+                                        <div class="col-md-12" style="background-color: #6e6e6e38;">Customar Payable</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row Subtotal-two" style="text-align: right; ">
+                                        <div class="col-md-12">{{cashmemo_two.amount}}</div>
+                                        <div class="col-md-12"> 50Tk</div>
+                                        {% if cashmemo_two.gift == True %}
+                                        <div class="col-md-12">20</div>                                                              
+                                        {% endif %}     
+                                        <div class="col-md-12" style="background-color: #d3d3d31f;">{{cashmemo_two.total_amount}}</div>
+                                        <div class="col-md-12" style="background-color: #6e6e6e38;">{{cashmemo_two.total_amount}}</div>
+                                    </div>
+                                </div>                                    
+                            </div>
+                        </div>                            
+                    </div>          
+                    <div class="row row-six">
+                        <div class="col-md-12">
+                            <p>Mytech.com, a service offered by nayonhawlader</p>
+                            <p>Thank you for your order</p>
+                        </div>
+                    </div>              
+                </div>
+            </div>
+        {% endfor %}         
+</div>
+      
+</body>
+</html>

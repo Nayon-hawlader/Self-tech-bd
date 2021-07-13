@@ -1,0 +1,72 @@
+{%load static%}
+
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order_completed</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Order_completed.css' %}">
+</head>
+<body>
+    
+
+
+
+    {% block blockname %}
+    {% include "header.html" %}
+    {% endblock blockname %}
+    {% block midcontent %}
+      
+
+
+<div id="breadcrum">
+    <div class="container">
+        <div>
+            <ul class="breadcrumb">
+                <li> <a href="{%url 'index'%}">Home</a></li>
+                >>
+                <li class="active">Completed Order</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="order-summary clearfix">
+                    <div class="section-title">
+                        <h3 class="title">Order Complated</h3>
+                    </div>
+                  
+                    <h2>Dear {{ user.username }} {{  user.last_name }}</h2>
+                    <h3>Your order is completed</h3>
+                    <h3>Order Code : {{ ordercode }}</h3>
+                    <h3>Thank You</h3>
+                
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock midcontent %}
+{% block footer %}
+{% include "footer.html" %}
+{% endblock footer %}
+</body>
+</html>

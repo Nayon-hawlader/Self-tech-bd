@@ -1,0 +1,123 @@
+body{
+    margin-bottom: 50px;
+}
+.row .col-sm-12, .row .col-md-12,.row .col-md-6, .row .col-lg-6{
+    margin: auto!important;
+}
+.page-section{
+    width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+.page-section .container{
+    width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+
+.breadcrumb-content ul li {
+    list-style: none;
+    display: inline-block;
+    color: lightslategray;
+    margin: 50px 0px;
+}
+
+.breadcrumb-content ul li:last-child::before {
+    content: "\00BB \0020";
+    font-size: 17px;
+}
+
+ul{
+    padding: 0px;
+    margin: 0px;
+}
+
+.controls input{
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.controls input:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+
+.mb-20{
+    padding-bottom: 20px;
+}
+
+#hint_id_password2{
+    margin-top: 15px;
+    
+}
+.btn{
+   float: right;
+}
+fieldset{
+    display: block;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+    border-width: 2px;
+    border-style: ridge;
+    border-color: aliceblue;
+    border-image: initial;
+}
+legend{
+    width: 14%;
+    text-align: center;
+    color: #656060!important;
+}
+@media all and (max-width: 180px) and (min-width: 50px) {
+    legend{
+        width: 100%;
+     }
+}
+@media all and (max-width: 250px) and (min-width: 180px) {
+    legend{
+        width: 80%;
+     }
+}
+@media all and (max-width: 350px) and (min-width: 250px) {
+    legend{
+        width: 50%;
+     }
+}
+@media all and (max-width: 768px) and (min-width: 350px) {
+    legend{
+        width: 30%;
+     }
+}
+@media all and (max-width: 1400px) and (min-width: 768px) {
+    legend{
+        width: 15%;
+     }
+}
+
+
+.controls ul li{
+    list-style-type: disclosure-closed;
+    margin-left: 20px;
+}
+#password-two{
+    margin: 0px!important;
+}

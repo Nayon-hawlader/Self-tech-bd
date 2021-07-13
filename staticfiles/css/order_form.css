@@ -1,0 +1,117 @@
+.checkout-area .col-lg-6{
+    padding: 50px;
+    border: 1px;
+    border-style: ridge;
+    border-color: darkgray;
+}
+
+ul{
+    padding-left: 0px;
+    margin-left: -15px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.breadcrumb-content ul li {
+    list-style: none;
+    display: inline-block;
+    color: lightslategray;
+}
+.breadcrumb-content ul li:last-child::before {
+    content: "\00BB \0020";
+    font-size: 17px;
+}
+
+
+.mt-10{
+    margin-top: 10px;
+}
+.mb-10{
+    margin-bottom: 20px;
+}
+
+.row input{
+    margin-bottom: 0px;
+}
+thead{
+    border-bottom: 0px;
+    background: #e9ecef;
+}
+tr{
+    border: 1px solid #e9ecef;
+   
+
+}
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border: 5px solid green!important;
+  
+}
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 0px solid #e9ecef;
+}
+
+.your-order h3,.checkbox-form h3{
+    padding-bottom: 1rem;
+}
+
+.card{
+    margin: 10px 0px;
+}
+.order-button-payment input{
+    float: right;
+    margin-top: 30px;
+    outline: none;
+    padding: 5px 20px;
+}
+.place-order-one{
+    float: right;
+    margin-top:10px !important;
+}
+
+.cat_menu_container ul
+{
+	display: block;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	visibility: hidden!important;
+	opacity: 0!important;;
+	min-width: 100%;
+	background: #FFFFFF;
+	box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+	-webkit-transition: opacity 0.3s ease;
+    -moz-transition: opacity 0.3s ease;
+    -ms-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
+}
+.cat_menu_container > ul
+{
+	padding-top: 13px;
+}
+.cat_menu_container:hover .cat_menu
+{
+	visibility: visible!important;
+	opacity: 1!important;
+}
+
+@media all and (max-width: 550px) and (min-width: 50px) {
+    
+    .breadcrumb-content{
+        padding: 0px 50px;
+    }
+}
+@media all and (max-width: 350px) and (min-width: 50px) {
+    .checkout-area .col-lg-6 {
+        padding: 20px!important;;
+        
+    }
+    .breadcrumb-content{
+        padding: 0px 50px;
+    }
+}

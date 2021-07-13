@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Blog Post</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="OneTech shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+<link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/blog_single_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/blog_single_responsive.css' %}">
+
+
+</head>
+<body>
+    
+  {% block blockname %}
+  {% include "header.html" %}
+  {% endblock blockname %}
+  {% block midcontent %}
+<div class="super_container">  
+<div class="home">
+<div class="home_background parallax-window">
+  <img src="{{blog.image.url}}" alt="">
+</div>
+</div>
+
+<div class="single_post">
+<div class="container">
+<div class="row">
+<div class="col-lg-8 offset-lg-2">
+<div class="single_post_title">{{blog.title}}</div>
+<div class="single_post_text">
+<p>{{blog.content}}</p>
+<div class="single_post_quote text-center">
+<div class="quote_image"><img src="{% static 'images/quote.png' %}" alt=""></div>
+<div class="quote_text">{{blog.quote}}</div>
+<div class="quote_name">{{blog.quote_owner}}</div>
+</div>
+<p>Praesent ac magna sed massa euismod congue vitae vitae risus. Nulla lorem augue, mollis non est et, eleifend elementum ante. Nunc id pharetra magna. Praesent vel orci ornare, blandit mi sed, aliquet nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="blog">
+<div class="container">
+<div class="row">
+<div class="col">
+<div class="blog_posts d-flex flex-row align-items-start justify-content-between">
+{% for bloglist in bloglist %}
+  
+
+<div class="blog_post">
+<div class="blog_image">
+  <img src="{{bloglist.image.url}}" alt="">
+</div>
+<div class="blog_text">{{bloglist.title}}</div>
+<div class="user_details d-flex flex-row align-items-end align-self-end justify-content-between">
+   <div class="posted_by">{{bloglist.author}}</div>
+   <div class="posted_at">{{bloglist.created_time}}{{bloglist.created_date}}</div>
+</div>
+<div class="blog_button"><a href="{% url 'blog_single' id=bloglist.id %}">Continue Reading</a></div>
+</div>
+
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+{% endblock midcontent %}
+{% block footer %}
+{% include "footer.html" %}
+{% endblock footer %}
+
+<script src="js/blog_single_custom.js"></script>
+
+
+</body>
+</html>

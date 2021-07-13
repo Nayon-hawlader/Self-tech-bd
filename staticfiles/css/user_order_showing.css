@@ -1,0 +1,48 @@
+
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+tr{
+  margin-top: -2px;
+} 
+td, th {
+    border: 1px solid darkgray;
+    border-top: 0px;
+    padding: 8px;
+    width: 140px;
+    text-align: center;
+}
+  
+th{
+  background-color:#dddddd ;
+}
+
+.total-amount, .total-products{
+  background-color: darkcyan;
+  color: white;
+  font-weight: 600;
+}
+.total-table th{
+  background-color: darkgray;
+  border-color: dimgrey;
+}
+
+.bg-transparent{
+  border: 0px;
+}
+
+tr a{
+  background-color: red;
+  color: white;
+  padding: 11px 28px;
+  font-weight: 600;
+}
+tr a:hover{
+
+  color: darkgrey;
+
+}

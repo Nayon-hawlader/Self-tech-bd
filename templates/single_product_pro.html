@@ -1,0 +1,293 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single product</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/single_product_pro.css' %}">
+  
+
+</head>
+<body>
+  {% block blockname %}
+  {% include "header.html" %}
+  {% endblock blockname %}
+  {% block midcontent %}
+    
+  
+    <div class="slider">
+        <div class="row-slider">
+         <div class="container">      
+           <div class="fluid">
+             <div class="row">             
+               <div class="col-md-6">		
+                 <div class="row">                            
+                   <div class="col-md-12 middle-col"> 
+                     <div class="show" href="{{product_pro.product_photo_main.url}}">
+                       <img src="{{product_pro.product_photo_main.url}}" id="show-img" alt="#">
+         
+                     </div>         
+                   </div>	 
+                  </div>		
+               </div>               
+               <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-col">
+                 
+                <div class="col-lg-12">
+                  <div class="product_description">
+                  <div class="product_category">{{product_pro.product_category}}</div>
+                  <div class="product_name">{{product_pro.brand_name}}</div>
+                  
+                  {% if product_pro.average_reviews == 5.0 %}   
+                  <div class="rating_r rating_r_5 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>           
+                  </div>
+                {% endif %}
+                {% if product_pro.average_reviews == 4.0 %}   
+                  <div class="rating_r rating_r_4 bestsellers_rating">         
+                      <i></i><i></i><i></i><i></i><i></i>          
+                  </div>
+                {% endif %}
+                {% if product_pro.average_reviews == 3.0 %}   
+                  <div class="rating_r rating_r_3 bestsellers_rating">         
+                   <i></i><i></i><i></i><i></i><i></i>         
+                  </div>
+                {% endif %}
+                {% if product_pro.average_reviews == 2.0 %}   
+                  <div class="rating_r rating_r_2 bestsellers_rating">         
+                      <i></i><i></i><i></i><i></i><i></i>         
+                  </div>
+                {% endif %}
+                {% if product_pro.average_reviews == 1.0 %}   
+                  <div class="rating_r rating_r_1 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>          
+                  </div>
+                {% endif %}
+                {% if product_pro.average_reviews == 0.0 %}   
+                  <div class="rating_r rating_r_0 bestsellers_rating">         
+                      <i></i><i></i><i></i><i></i><i></i>     
+                  </div>
+                {% endif %}
+                  <div class="product_text"><p>{{product_pro.product_description}}</p></div>
+                  <div class="order_info d-flex flex-row">
+                               
+                  <form action="{% url 'Add_to_Shoping_cart_trend' id=product_pro.id  %}" method="POST">
+                      {% csrf_token %}   
+                  <div class="clearfix" style="z-index: 1000;">
+                  <ul class="product_color quantity_div">
+                      <div class="Quantity">
+                          <span>Quantity: </span>
+                        <input class="cart-plus-minus-box" value="1" min="1" max="10" type="number" name="quantity">
+                        
+                      </div>
+                  </ul>        
+                  
+                  <ul class="product_color">
+                  <li>
+                  <span>Color:<input type="text" name="color" readonly="readonly" value="Default"></span>
+                        
+                  </li>
+                  </ul>
+                  </div>
+                  <div class="product_price">${{product_pro.current_price}}</div>
+                  <div class="button_container">
+                   
+                      
+                      <button  class="button cart_button" type="submit" >Add to cart</button>                
+                    
+                    </form>                
+                  <div class="product_fav"><i class="fas fa-heart"></i></div>
+                  </div>
+      
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                </div>	
+             </div> 
+           </div>
+          </div>
+        </div>
+      </div>
+      {% endblock midcontent %}
+
+  {% block review %}
+      <div>
+        <div class="trend_review">
+          <div class="container">
+            <div class="review_here"><span>Review</span></div>            
+              <div class="trend_review_content">
+                <div class="review-view-here">              
+                  {% for p in  trend_comment %}
+                  <div class="comment-review">
+                      <span>Rating</span>
+                      <ul class="rating">
+                        {% if p.rate == 5.0 %}   
+                  <div class="rating_r rating_r_5 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>           
+                  </div>
+                {% endif %}
+                {% if p.rate == 4.0 %}   
+                  <div class="rating_r rating_r_4 bestsellers_rating">         
+                      <i></i><i></i><i></i><i></i><i></i>          
+                  </div>
+                {% endif %}
+                {% if p.rate == 3.0 %}   
+                  <div class="rating_r rating_r_3 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>         
+                  </div>
+                {% endif %}
+                {% if p.rate == 2.0 %}   
+                  <div class="rating_r rating_r_2 bestsellers_rating">         
+                      <i></i><i></i><i></i><i></i><i></i>         
+                  </div>
+                {% endif %}
+                {% if p.rate == 1.0 %}   
+                  <div class="rating_r rating_r_1 bestsellers_rating">         
+                  <i></i><i></i><i></i><i></i><i></i>          
+                  </div>
+                {% endif %}
+                {% if p.rate == 0.0 %}   
+                  <div class="rating_r rating_r_0 bestsellers_rating">         
+                      <i></i><i></i><i></i><i></i><i></i>     
+                  </div>
+                {% endif %}
+                      </ul>
+                  </div>
+                  <div class="comment-author-infos pt-25">
+                      <span>{{p.user.username}}</span>
+                      <em>{{p.created_at}}</em>
+                  </div>
+                  <div class="comment-details">
+                      <h4 class="title-block">{{p.subject}}</h4>
+                      <p>{{p.comment}}</p>
+                  </div>
+                  {% empty %} 
+                  <h4 class="title-block">This item has no reviews...</h4>             
+                  {% endfor %}
+              
+                  </div>
+              </div>
+              <button type="button" class="btn review_btn" data-toggle="modal" data-target="#exampleModal">
+                Write a review
+              </button>  
+              
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Write your review here</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="rating">
+                <h2>Your Rating Panel</h2>
+                
+                <form action="{% url 'comment_trend'  id=product_pro.id %}" method="POST">
+                  {% csrf_token %}
+                <div class="feedback-input">
+                  <div class="row">
+                    <div class="d-none"><input type="text" name="brand_name" value="{{product_pro.brand_name}}"></div>
+                    <div class="col-3">
+                          <label>Your Rating</label>
+                    </div>
+                    <div class="col-9">
+                      <p class="your-opinion">                                
+                        <span>
+                            <select class="star-rating" name="rate">
+                                <option value="1" name="rate">1
+                                </option>
+                                <option value="2" name="rate">2
+                                </option>
+                                <option value="3" name="rate">3
+                                </option>
+                                <option value="4" name="rate">4
+                                </option>
+                                <option value="5" name="rate">5
+                                </option>
+                            </select>
+                        </span>
+                    </p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                       <label for="author">Subject<span
+                              class="required"></span>
+                      </label>
+
+                    </div>
+                    <div class="col-9">
+                      <p class="feedback-form-author">                               
+                      <input id="author" name="subject" value=""
+                          size="30" aria-required="true" type="text">
+                      </p>
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                         <label for="feedback">Your Review</label>
+                    </div>
+                    <div class="col-9">
+                        <p class="feedback-form">                                                                  
+                            <textarea id="feedback" name="comment"
+                              cols="32" rows="4"
+                              aria-required="true"></textarea>
+                        </p>
+                    </div>
+                  </div>
+                </div>         
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              {% if user.id is not Nones %}
+              <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+              {% else %}
+              <h3>You should login first</h3>
+              {% endif %}
+
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+<!-- model-end      -->
+          </div>          
+        </div>
+      </div>
+  {% endblock review %}
+
+      {% block slider %}
+      {% include "recent_view.html" %}
+      {% endblock slider %}
+
+      
+      {% block footer %}
+      {% include "footer.html" %}
+      {% endblock footer %}
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>  
+    <script src="{% static 'js/zoom-image.js' %}"></script>  
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/single_product_pro_two.js' %}"></script>
+  
+    <script src="{% static 'js/single_product_pro.js' %}"></script>
+   
+
+        
+    </body>
+</html>

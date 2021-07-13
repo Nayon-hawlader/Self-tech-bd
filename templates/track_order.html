@@ -1,0 +1,258 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+    <link rel="stylesheet" href="{% static 'css/track_order.css'%}">
+    <title>track order</title>
+</head>
+
+<body>    
+    {% block blockname %}
+    {% include "header.html" %}
+    {% endblock blockname %}
+    <div id="breadcrum">
+        <div class="container">
+            <div>
+                <ul class="breadcrumb">
+                    <li> <a href="{%url 'index'%}">Home</a></li>
+                    >>
+                    <li class="active">Order tracker</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div>
+        {% for orders in order %}        
+          {% if orders.status == 'New' %}
+            <div class="order-box">
+                <div class="container">
+                    <div class="div-one"><h1>ORDER TRACKING: ORDER NO {{orders.id}}</h1></div>
+                    <div class="div-two">
+                        <div class="div-two-child">
+                            <H3>Shipped Via : Sundarban courier </H3>
+                        </div>
+                        <div class="div-two-child">                                
+                            <h3 style="color: darkblue;">Please wait your order is procceing<h3>                                                      
+                                                   
+                        </div>
+                        <div class="div-two-child">
+                            <h3>Expected Date :</h3> 
+                        </div>
+                    </div>
+                    <div class="div-three">
+                        <div class="container">
+                            <div class="div-three-content">
+                                <div class="child-box-one">
+                                    <div class="child-box-content">                              
+                                        <i class="fa fa-user-check" style="background-color:gray;" ></i>
+                                        <i class="fa fa-box" style="background-color:gray;"></i>
+                                        <i class="fa fa-shipping-fast" style="background-color: gray;"></i>   
+                                        <i class="fa fa-people-carry" style="background-color: gray;"></i>                   
+                                        
+                                     </div>
+                                </div> 
+                                <div class="child-box-two">                                    
+                                    <p style="color: gray;">Accepted</p>
+                                    <p style="color: gray;">Preparing</p>
+                                    <p style="color: gray;">Onshiping</p>
+                                    <p style="color: gray;">Completed</p> 
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}  
+        {% if orders.status == 'Accepted' %}
+            <div class="order-box">
+                <div class="container">
+                    <div class="div-one"><h1>ORDER TRACKING: ORDER NO {{orders.id}}</h1></div>
+                    <div class="div-two">
+                        <div class="div-two-child">
+                            <h3>Shipped Via : Sundarban courier </h3>
+                        </div>
+                        <div class="div-two-child">                                
+                            <h3>Status :{{ orders.status}}<h3>                                                     
+                                                   
+                        </div>
+                        <div class="div-two-child">
+                            <h3>Expected Date :</h3> 
+                        </div>
+                    </div>
+                    <div class="div-three">
+                        <div class="container">
+                            <div class="div-three-content">
+                                <div class="child-box-one">
+                                    <div class="child-box-content">                              
+                                        <i class="fa fa-user-check" style="background-color:yellowgreen;" ></i>
+                                        <i class="fa fa-box" style="background-color:gray;"></i>
+                                        <i class="fa fa-shipping-fast" style="background-color: gray;"></i>   
+                                        <i class="fa fa-people-carry" style="background-color: gray;"></i>                                           
+                                     </div>
+                                </div> 
+                                <div class="child-box-two">                                    
+                                    <p style="color: white;">Accepted</p>
+                                    <p style="color: gray;">Preparing</p>
+                                    <p style="color: gray;">Onshiping</p>
+                                    <p style="color: gray;">Completed</p> 
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}  
+        {% if orders.status == 'Preparing' %}
+            <div class="order-box">
+                <div class="container">
+                    <div class="div-one"><h1>ORDER TRACKING: ORDER NO {{orders.id}}</h1></div>
+                    <div class="div-two">
+                        <div class="div-two-child">
+                            <h3>Shipped Via : Sundarban courier </h3>
+                        </div>
+                        <div class="div-two-child">                                
+                            <h3>Status : {{ orders.status}}<h3>                                                     
+                                                   
+                        </div>
+                        <div class="div-two-child">
+                            <h3>Expected Date :</h3> 
+                        </div>
+                    </div>
+                    <div class="div-three">
+                        <div class="container">
+                            <div class="div-three-content">
+                                <div class="child-box-one">
+                                    <div class="child-box-content">                              
+                                        <i class="fa fa-user-check" style="background-color:yellowgreen;" ></i>
+                                        <i class="fa fa-box" style="background-color:yellowgreen;"></i>
+                                        <i class="fa fa-shipping-fast" style="background-color: gray;"></i>   
+                                        <i class="fa fa-people-carry" style="background-color: gray;"></i>                                            
+                                    </div>
+                                </div> 
+                                <div class="child-box-two">                                    
+                                    <p style="color: white;">Accepted</p>
+                                    <p style="color: white;">Preparing</p>
+                                    <p style="color: gray;">Onshiping</p>
+                                    <p style="color: gray;">Completed</p>
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}  
+        {% if orders.status == 'Onshiping' %}
+            <div class="order-box">
+                <div class="container">
+                    <div class="div-one"><h1>ORDER TRACKING: ORDER NO {{orders.id}}</h1></div>
+                    <div class="div-two">
+                        <div class="div-two-child">
+                            <h3>Shipped Via : Sundarban courier </h3>
+                        </div>
+                        <div class="div-two-child">                                
+                            <h3>Status : {{ orders.status}}<h3>                                                     
+                                                   
+                        </div>
+                        <div class="div-two-child">
+                            <h3>Expected Date :</h3> 
+                        </div>
+                    </div>
+                    <div class="div-three">
+                        <div class="container">
+                            <div class="div-three-content">
+                                <div class="child-box-one">
+                                    <div class="child-box-content">                              
+                                        <i class="fa fa-user-check" style="background-color:yellowgreen;" ></i>
+                                        <i class="fa fa-box" style="background-color:yellowgreen;"></i>
+                                        <i class="fa fa-shipping-fast" style="background-color: yellowgreen;"></i>   
+                                        <i class="fa fa-people-carry" style="background-color: gray;"></i>                                            
+                                    </div>
+                                </div> 
+                                <div class="child-box-two">                                    
+                                    <p style="color: white;">Accepted</p>
+                                    <p style="color: white;">Preparing</p>
+                                    <p style="color: white;">Onshiping</p>
+                                    <p style="color: gray;">Completed</p>
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}  
+        {% if orders.status == 'Completed' %}
+            <div class="order-box">
+                <div class="container">
+                    <div class="div-one"><h1>ORDER TRACKING: ORDER NO {{orders.id}}</h1></div>
+                    <div class="div-two">
+                        <div class="div-two-child">
+                            <h3>Shipped Via : Sundarban courier </h3>
+                        </div>
+                        <div class="div-two-child">                                
+                            <h3>Status : {{ orders.status}}<h3>                                                     
+                                                   
+                        </div>
+                        <div class="div-two-child">
+                            <h3>Expected Date :</h3> 
+                        </div>
+                    </div>
+                    <div class="div-three">
+                        <div class="container">
+                            <div class="div-three-content">
+                                <div class="child-box-one">
+                                    <div class="child-box-content">                              
+                                        <i class="fa fa-user-check" style="background-color:yellowgreen;" ></i>
+                                        <i class="fa fa-box" style="background-color:yellowgreen;"></i>
+                                        <i class="fa fa-shipping-fast" style="background-color: yellowgreen;"></i>   
+                                        <i class="fa fa-people-carry" style="background-color: yellowgreen;"></i>                                            
+                                    </div>
+                                </div> 
+                                <div class="child-box-two">                                    
+                                    <p style="color: white;">Accepted</p>
+                                    <p style="color: white;">Preparing</p>
+                                    <p style="color: white;">Onshiping</p>
+                                    <p style="color: white;">Completed</p>
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if orders.status == 'Delivered' %}     
+            <div class="order-box">
+                <div class="container">
+                    <div class="div-one"><h1>ORDER TRACKING:<span style="color: darkslateblue;">YOU HAVE NO ORDER YET</span> </h1></div>     
+                </div>
+            </div>              
+        {% endif %}  
+        {% if orders.status == 'Cancelled' %}     
+            <div class="order-box">
+                <div class="container">
+                    <div class="div-one"><h1>ORDER TRACKING : ORDER NO{{orders.id}}</h1><h1 style="color: red;"> Your order is cancelled for {{orders.adminnote}} </h1></div>     
+                </div>
+            </div>              
+        {% endif %}  
+        {% empty %}
+        <div>
+            <div class="order-box">
+                <div class="container">
+                    <div class="div-one"><h1>ORDER TRACKING:<span style="color: darkslateblue;">YOU HAVE NO ORDER YET</span> </h1></div>     
+                </div>
+            </div>
+        </div> 
+    {% endfor %}
+</div>
+{% block footer %}
+{% include "footer.html" %}
+{% endblock footer %}
+</body>
+</html>
+

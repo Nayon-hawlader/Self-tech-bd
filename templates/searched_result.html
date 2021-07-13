@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>OneTech</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="OneTech shop project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/searched_result.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+
+</head>
+
+<body>
+    {% block blockname %}
+    {% include "header.html" %}
+    {% endblock blockname %}
+    {% block midcontent %}
+      
+   
+
+    <div class="super_container">
+    <div class="row" id="my-row">
+        {% for featured_product in featured_products %}
+
+            <div class="col-12 col-sm-3 col-lg-3  my-cart">                                 
+                <form action="{% url 'Add_to_Shoping_cart' id=featured_product.id %}" class="cart_quantity" method="POST">
+                    {% csrf_token %}       
+
+                    <div class="featured_slider_item">
+                        <div class="border_active"></div>
+                        
+                        <div
+                            class="product_item  discount is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                <div
+                                    class="product_image d-flex flex-column align-items-center justify-content-center">
+                                    <img id="main" src="{{featured_product.product_photo_main.url}}" alt="">
+                                
+
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_price  discount">
+                                        ${{featured_product.current_price}}                                                                            
+                                            {% if featured_product.product_price_before == 0 %}
+                                                <span></span>
+                                                {% elif featured_product.product_price_before == current_price %}
+                                                    <span>
+                                                        ${{featured_product.current_price}}
+                                                    </span>
+                                                {% elif featured_product.product_price_before > featured_product.current_price %}
+                                                    <span>
+                                                        ${{featured_product.product_price_before}}
+                                                    </span>                                                                                        
+                                            {% endif %}
+                                        
+                                       
+                                    </div>
+                                    <div class="product_name">
+                                        <div><a href="{% url 'product_single' id=featured_product.id %}" tabindex="0">{{featured_product.brand_name}}...</a></div>
+                                    </div>
+                                    <div class="product_extras"> 
+                                        <div class="add-to-cart-box">
+                                                   <a  href="{% url 'Add_to_Shoping_cart' id=featured_product.id %}">Add to Cart</a>
+                                        </div>
+                                 
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="product_fav"><i class="fas fa-heart"></i></div>
+                            <ul class="product_marks">
+                                
+                                {% if featured_product.new == True %}
+                                    <li class="product_mark product_new">new</li>                                                                        
+                                {% endif %}
+                               
+                                                                                             
+                                    {% if featured_product.total_discount == 10 %}                                                                  
+                                       <li class="product_mark product_discount">-10%</li>
+                                       {% elif featured_product.total_discount == 20 %}
+                                       <li class="product_mark product_discount">-20%</li>
+                                       {% elif featured_product.total_discount == 30 %}
+                                       <li class="product_mark product_discount">-30%</li>
+                                       {% elif featured_product.total_discount == 40 %}
+                                       <li class="product_mark product_discount">-40%</li>
+                                       {% elif featured_product.total_discount == 50 %}
+                                       <li class="product_mark product_discount">-50%</li>                                                                           
+                                       {% else %}
+                                       <li class="product_mark product_discount" style="display: none;"></li>
+                                    {% endif %}                
+                                </ul>    
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <img src="{% static 'images/nothing_found.png' %}" alt="" srcset="" style="height: 500px;"> 
+            {% endfor %}          
+         </div>    
+    </div>
+
+    {% endblock midcontent %}
+    {% block footer %}
+    {% include "footer.html" %}
+    {% endblock footer %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+
+</html>

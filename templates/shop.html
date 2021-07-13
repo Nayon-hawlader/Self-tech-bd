@@ -1,0 +1,385 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Shop</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="OneTech shop project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="{% static 'css/fontawesome-all.css" rel="stylesheet" type="text/css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/shop_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/shop_responsive.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+
+
+
+</head>
+
+<body>
+    <div class="super_container">
+        {% block blockname %}
+        {% include "header.html" %}
+        {% endblock blockname %}
+        {% block midcontent %}
+          
+        <div class="home">
+            <div class="home_background parallax-window" data-parallax="scroll"
+                data-image-src="images/banner_background.jpg"></div>
+            <div class="home_overlay"></div>
+            <div class="home_content d-flex flex-column align-items-center justify-content-center">
+                <h2 class="home_title">Smartphones & Tablets</h2>
+            </div>
+        </div>
+
+        <div class="shop">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+
+                        <div class="shop_sidebar">
+                            <div class="sidebar_section">
+                                <div class="sidebar_title">Categories</div>
+                                <ul class="sidebar_categories">
+                                    <li><a href="#">Computers & Laptops</a></li>
+                                    <li><a href="#">Cameras & Photos</a></li>
+                                    <li><a href="#">Hardware</a></li>
+                                    <li><a href="#">Smartphones & Tablets</a></li>
+                                    <li><a href="#">TV & Audio</a></li>
+                                    <li><a href="#">Gadgets</a></li>
+                                    <li><a href="#">Car Electronics</a></li>
+                                    <li><a href="#">Video Games & Consoles</a></li>
+                                    <li><a href="#">Accessories</a></li>
+                                </ul>
+                            </div>
+                            <div class="sidebar_section filter_by_section">
+                                <div class="sidebar_title">Filter By</div>
+                                <div class="sidebar_subtitle">Price</div>
+                                <div class="filter_price">
+                                    <div id="slider-range" class="slider_range"></div>
+                                    <p>Range: </p>
+                                    <p><input type="text" id="amount" class="amount" readonly
+                                            style="border:0; font-weight:bold;"></p>
+                                </div>
+                            </div>
+                            <div class="sidebar_section">
+                                <div class="sidebar_subtitle color_subtitle">Color</div>
+                                <ul class="colors_list">
+                                    <li class="color"><a href="#" style="background: #b19c83;"></a></li>
+                                    <li class="color"><a href="#" style="background: #000000;"></a></li>
+                                    <li class="color"><a href="#" style="background: #999999;"></a></li>
+                                    <li class="color"><a href="#" style="background: #0e8ce4;"></a></li>
+                                    <li class="color"><a href="#" style="background: #df3b3b;"></a></li>
+                                    <li class="color"><a href="#"
+                                            style="background: #ffffff; border: solid 1px #e1e1e1;"></a></li>
+                                </ul>
+                            </div>
+                            <div class="sidebar_section">
+                                <div class="sidebar_subtitle brands_subtitle">Brands</div>
+                                <ul class="brands_list">
+                                    <li class="brand"><a href="#">Apple</a></li>
+                                    <li class="brand"><a href="#">Beoplay</a></li>
+                                    <li class="brand"><a href="#">Google</a></li>
+                                    <li class="brand"><a href="#">Meizu</a></li>
+                                    <li class="brand"><a href="#">OnePlus</a></li>
+                                    <li class="brand"><a href="#">Samsung</a></li>
+                                    <li class="brand"><a href="#">Sony</a></li>
+                                    <li class="brand"><a href="#">Xiaomi</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+
+                        <div class="shop_content">
+                            <div class="shop_bar clearfix">
+                                <div class="shop_product_count"><span>{{total_product_count}}</span> products found</div>
+                                <div class="shop_sorting">
+                                    <span>Sort by:</span>
+                                    <ul>
+                                        <li>
+                                            <span class="sorting_text">Orginal order<i
+                                                    class="fas fa-chevron-down"></span></i>
+                                            <ul>
+                                                <li class="shop_sorting_button"
+                                                    data-isotope-option='{ "sortBy": "original-order" }'>Orginal order
+                                                </li>
+                                                <li class="shop_sorting_button"
+                                                    data-isotope-option='{ "sortBy": "name" }'>name</li>
+                                                <li class="shop_sorting_button"
+                                                    data-isotope-option='{ "sortBy": "price" }'>price</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product_grid">
+                                <div class="product_grid_border"></div>
+
+
+                                {% for featured_product in featured_products %}
+                                        
+                                <form action="{% url 'Add_to_Shoping_cart' id=featured_product.id %}" class="cart_quantity" method="POST">
+                                    {% csrf_token %}   
+            
+                                <div class="product_item is_new">
+                                    <div class="product_border"></div>
+
+                                    <div
+                                        class="product_image d-flex flex-column align-items-center justify-content-center">
+                                        <img src="{{featured_product.product_photo_main.url}}" alt=""></div>
+                                        <div class="product_content">
+                                            <div class="product_price  discount">
+                                                ${{featured_product.current_price}}                                     
+                                            </div>
+                                            <div class="product_name">
+                                                <div><a href="{% url 'product_single' id=featured_product.id %}">{{featured_product.brand_name}}...</a></div>
+                                            </div>
+                                            <div class="product_extras">               
+                                                
+                                                <div class="add-to-cart-box">
+                                                           <a  href="{% url 'Add_to_Shoping_cart' id=featured_product.id %}">Add to Cart</a>
+                                                </div>
+                                         
+                                            </div>
+                                        </div>
+                                </form>
+                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                    <ul class="product_marks">
+                                                                    
+                                        {% if featured_product.new == True %}
+                                            <li class="product_mark product_new">new</li>                                                                        
+                                        {% endif %}
+                                       
+                                                                                                     
+                                            {% if featured_product.total_discount == 10 %}                                                                  
+                                               <li class="product_mark product_discount">-10%</li>
+                                               {% elif featured_product.total_discount == 20 %}
+                                               <li class="product_mark product_discount">-20%</li>
+                                               {% elif featured_product.total_discount == 30 %}
+                                               <li class="product_mark product_discount">-30%</li>
+                                               {% elif featured_product.total_discount == 40 %}
+                                               <li class="product_mark product_discount">-40%</li>
+                                               {% elif featured_product.total_discount == 50 %}
+                                               <li class="product_mark product_discount">-50%</li>                                                                           
+                                               {% else %}
+                                               <li class="product_mark product_discount" style="display: none;"></li>
+                                            {% endif %}                               
+                                        </ul>
+                                    </div>       
+                                {%  endfor  %}  
+                                
+                                {% for trends in trend %}
+                                        
+                                <form action="{% url 'Add_to_Shoping_cart_trend' id=trends.id %}" class="cart_quantity" method="POST">
+                                    {% csrf_token %}   
+            
+                                <div class="product_item is_new">
+                                    <div class="product_border"></div>
+
+                                    <div
+                                        class="product_image d-flex flex-column align-items-center justify-content-center">
+                                        <img src="{{trends.product_photo_main.url}}" alt=""></div>
+                                        <div class="product_content">
+                                            <div class="product_price  discount">
+                                                ${{trends.current_price}}                                     
+                                            </div>
+                                            <div class="product_name">
+                                                <div><a href="{% url 'single_product_pro' id=trends.id %}">{{trends.brand_name}}...</a></div>
+                                            </div>
+                                            <div class="product_extras">               
+                                                
+                                                <div class="add-to-cart-box">
+                                                           <a  href="{% url 'Add_to_Shoping_cart_trend' id=trends.id %}">Add to Cart</a>
+                                                </div>
+                                         
+                                            </div>
+                                        </div>
+                                </form>
+                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                    <ul class="product_marks">
+                                                                    
+                                        {% if trends.new == True %}
+                                            <li class="product_mark product_new">new</li>                                                                        
+                                        {% endif %}
+                                       
+                                                                                                     
+                                            {% if trends.total_discount == 10 %}                                                                  
+                                               <li class="product_mark product_discount">-10%</li>
+                                               {% elif trends.total_discount == 20 %}
+                                               <li class="product_mark product_discount">-20%</li>
+                                               {% elif trends.total_discount == 30 %}
+                                               <li class="product_mark product_discount">-30%</li>
+                                               {% elif trends.total_discount == 40 %}
+                                               <li class="product_mark product_discount">-40%</li>
+                                               {% elif trends.total_discount == 50 %}
+                                               <li class="product_mark product_discount">-50%</li>                                                                           
+                                               {% else %}
+                                               <li class="product_mark product_discount" style="display: none;"></li>
+                                            {% endif %}                               
+                                        </ul>
+                                    </div>       
+                                {%  endfor  %}                                 
+                            </div>
+                            </div>
+                            
+                           
+                            <!-- pagination -->
+
+
+                             <!-- pagination -->
+                             <div class="shop_page_nav d-flex flex-row">                                
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">                                    
+                                        <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                                            <a class="page-link" href="?page=1" tabindex="-1">FIRST</a>
+                                        </li>
+                                        <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                                            <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %} " tabindex="-1">Previous</a>
+                                        </li>
+                            
+                                        {% if page_obj.number|add:'-4' > 1 %}
+                                            <li class="page-item disabled"><a class="page-link" href="?page={{ page_obj.number|add:'-5' }}">&hellip;</a></li>
+                                        {% endif %}
+                            
+                                        {% for i in page_obj.paginator.page_range %}
+                                            {% if page_obj.number == i %}
+                                                <li class="active page-item disabled"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                            {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                            
+                                        {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+                                            <li class="page-item disabled"><a class="page-link" href="?page={{ page_obj.number|add:'5' }}">&hellip;</a></li>
+                                        {% endif %}
+                            
+                                        <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                                            <a class="page-link" href="{% if page_obj.has_next %} ?page={{ page_obj.next_page_number }} {% endif %}">Next</a>
+                                        </li>
+                                        <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                                            <a class="page-link" href="{% if page_obj.has_next %} ?page={{ page_obj.paginator.num_pages }}  {% endif %}">LAST</a>
+                                        </li>
+                                    </ul>
+                                </nav> 
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+        {% block slider %}
+        {% include "recent_view.html" %}
+        {% endblock slider %} 
+
+        <div class="brands">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="brands_slider_container">
+
+                            <div class="owl-carousel owl-theme brands_slider">
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_1.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_2.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_3.png' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_4.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_5.png' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_6.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_7.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_8.png' %}" alt=""></div>
+                                </div>
+                            </div>
+
+                            <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
+                            <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="newsletter">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div
+                            class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+                            <div class="newsletter_title_container">
+                                <div class="newsletter_icon"><img src="{% static 'images/send.png' %}" alt=""></div>
+                                <div class="newsletter_title">Sign up for Newsletter</div>
+                                <div class="newsletter_text">
+                                    <p>...and receive %20 coupon for first shopping.</p>
+                                </div>
+                            </div>
+                            <div class="newsletter_content clearfix">
+                                <form action="#" class="newsletter_form">
+                                    <input type="email" class="newsletter_input" required="required"
+                                        placeholder="Enter your email address">
+                                    <button class="newsletter_button">Subscribe</button>
+                                </form>
+                                <div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock midcontent %}
+        {% block footer %}
+        {% include "footer.html" %}
+        {% endblock footer %}
+    </div>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/TweenMax.min.js' %}"></script>
+    <script src="js/TimelineMax.min.js' %}"></script>
+    <script src="js/ScrollMagic.min.js' %}"></script>
+    <script src="{% static 'js/animation.gsap.min.js' %}"></script>
+    <script src="{% static 'js/ScrollToPlugin.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/easing.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/parallax.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/shop_custom.js' %}"></script>
+
+   
+</body>
+
+</html>

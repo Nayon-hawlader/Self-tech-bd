@@ -1,0 +1,2164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>OneTech</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="OneTech shop project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+
+</head>
+
+<body>
+ 
+<div class="super_container">   
+
+    <header class="header">
+        <div class="top_bar">
+            <div class="container">
+                <div class="row">
+                    <div class="my_col">
+                         <div class="top_bar_contact_item">
+                                <div class="top_bar_icon"><img src="{% static 'images/phone.png' %}" alt=""></div>+8801733493563
+                            </div>
+                    </div>
+                    <div class="my_col">
+                        <div class="top_bar_contact_item">
+                            <div class="top_bar_icon"><img src="{% static 'images/mail.png' %}" alt=""></div><a
+                                href="#"><span
+                                    class="__cf_email__"
+                                    data-cfemail="">Nayonhawlader.bd@gmail.com</span></a>
+                            </div>
+                    </div>
+                    <div class="my_col">
+                        <div class="top_bar_content ml-auto">
+                        <div class="top_bar_menu">
+                            <ul class="standard_dropdown top_bar_dropdown">
+                                <li>
+                                    <a href="#">English<i class="fas fa-chevron-down"></i></a>
+                                    <ul>
+                                        <li><a href="#">Italian</a></li>
+                                        <li><a href="#">Spanish</a></li>
+                                        <li><a href="#">Japanese</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
+                                    <ul>
+                                        <li><a href="#">EUR Euro</a></li>
+                                        <li><a href="#">GBP British Pound</a></li>
+                                        <li><a href="#">JPY Japanese Yen</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="top_bar_user">
+                            <div class="user_icon">                      
+        
+                                {% for users in users %}
+                                  <a href="{% url 'userprofile' %}"><img class="user_main" src="{{users.image.url}}" alt="">     </a>                              
+                                {% empty %}
+                                    <img class="user_temp"  src="{% static 'images/user.svg' %}" alt="">  
+                                {% endfor %}
+                                    
+                               
+                            </div>
+                            <div class="user_box">
+                            {% if user.id is not None %}                        
+                            <a href="{% url 'userprofile' %}" >hi {{request.user.username}}</a>
+                            <a href="{% url 'user_logout' %}" >Logout</a>
+                            <a href="{% url 'OrderCart' %}">Checkout</a>
+                            {% else %}                              
+                            <a href="{% url 'user_login' %}" >SignIn/SignUp</a>
+                            <a href="{% url 'user_register' %}" >Register</a>
+    
+                            {% endif %}
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header_main">
+            
+            <div class="container">
+                {% if messages %} {% for message in messages %}
+                   <div class="alert alert-{{message.tags}}" role="alert">
+                        {{message}}
+                    </div>
+                {% endfor %}       
+                {% endif %}
+                <div class="row">
+    
+                    <div class="col-lg-2 col-sm-3 col-3 order-1">
+                        <div class="logo_container">
+                            <div class="logo"><a href="{% url 'index' %}">OneTech</a></div>
+                        </div>
+                    </div>
+    
+                    <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                        <div class="header_search">
+                            <div class="header_search_content">
+                                <div class="header_search_form_container">
+                                    <form class="header_search_form clearfix" method="GET" action="/search" >
+                                        <input type="search" name="search" class="header_search_input"
+                                            placeholder="Search for products...">
+                                        <div class="custom_dropdown">
+                                            <div class="custom_dropdown_list">
+                                                <span class="custom_dropdown_placeholder clc">All Categories</span>
+                                                <i class="fas fa-chevron-down"></i>
+                                                <ul class="custom_list clc">
+                                                    <li><a class="clc" href="#">All Categories</a></li>
+                                                    <li><a class="clc" href="#">Computers</a></li>
+                                                    <li><a class="clc" href="#">Laptops</a></li>
+                                                    <li><a class="clc" href="#">Cameras</a></li>
+                                                    <li><a class="clc" href="#">Hardware</a></li>
+                                                    <li><a class="clc" href="#">Smartphones</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="header_search_button trans_300"
+                                            value="Submit"><img src="{% static 'images/search.png' %}" alt=""></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                        <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                            <div class="wishlist d-flex flex-row align-items-center justify-content-end">
+                                <div class="wishlist_icon"><img src="{% static 'images/heart.png' %}" alt=""></div>
+                                <div class="wishlist_content">
+                                    <div class="wishlist_text"><a href="#">Wishlist</a></div>
+                                    <div class="wishlist_count">115</div>
+                                </div>
+                            </div>
+                            
+                            <div class="cart">
+                                <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                    <div class="cart_icon">
+                                      <a href="{% url 'cart_details' %}"><img src="{% static 'images/cart.png' %}" alt=""></a>  
+                                        {% if user.id is not None %}                                        
+                                                <div class="cart_count"><span>{{total_product}}</span></div>                                          
+                                            {% else %}
+                                            <div class="cart_count"><span>0</span></div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="cart_content">
+                                        {% if user.id is not None %}     
+                                        <div class="cart_text"><a href="{% url 'cart_details' %}">Cart</a></div>
+                                        {% else %}
+                                        <div class="cart_text"><a href="#">Cart</a></div>
+                                        {% endif %}
+     
+                                        {% if user.id is not None %}     
+                                        <div class="cart_price">${{total_amount}}</div>
+                                        {% else %}
+                                        <div class="cart_price">$0</div>
+                                        {% endif %}
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <nav class="main_nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="main_nav_content d-flex flex-row">
+    
+                            <div class="cat_menu_container">
+                                <div
+                                    class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+                                    <div class="cat_burger"><span></span><span></span><span></span></div>
+                                    <div class="cat_menu_text">categories</div>
+                                </div>
+                                <ul class="cat_menu">
+                                    <li><a href="#">Computers & Laptops <i
+                                                class="fas fa-chevron-right ml-auto"></i></a></li>
+                                    <li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
+                                    <li class="hassubs">
+                                        <a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
+                                        <ul>
+                                            
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a>
+                                    </li>
+                                    <li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a>
+                                    </li>
+                                    <li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+                                </ul>
+                            </div>
+    
+                            <div class="main_nav_menu ml-auto">
+                                <ul class="standard_dropdown main_nav_dropdown">
+                                    <li><a href="{% url 'index' %}">Home<i class="fas fa-chevron-down"></i></a></li>
+                                    <li class="hassubs">
+                                        <a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                <ul>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                    </li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                    </li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="hassubs">
+                                        <a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                <ul>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                    </li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                    </li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="hassubs">
+                                        <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li><a href="{% url 'Shop' %}">Shop<i class="fas fa-chevron-down"></i></a></li>
+                                           
+                                            <li><a href="{% url 'Blog' %}">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                            
+                    
+                                            <li><a href="{% url 'cart_details' %}">Cart<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="{% url 'Contact' %}">Contact<i
+                                                        class="fas fa-chevron-down"></i></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{% url 'Blog' %}">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="{% url 'Contact' %}">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                </ul>
+                            </div>
+    
+                            <div class="menu_trigger_container ml-auto">
+                                <div  class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+                                    <div class="menu_burger">
+                                        <div class="menu_trigger_text">menu</div>
+                                        <div class="cat_burger menu_burger_inner">
+                                            <span></span><span></span><span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    
+    
+        <div class="page_menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="page_menu_content">
+                            <div class="page_menu_search">
+                                <form class="header_search_form clearfix" method="GET" action="/search" >
+                                    <input type="search" name="search" class="header_search_input"
+                                        placeholder="Search for products...">
+                                        <button type="submit" class="header_search_button trans_300"
+                                        value="Submit"><img src="{% static 'images/search.png' %}" alt=""></button>    
+                                </form>
+                            </div>
+                            <ul class="page_menu_nav">
+                                <li class="page_menu_item">
+                                    <a href="#">Home</a>
+                                </li>
+                                <li class="page_menu_item has-children">
+                                    <a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
+                                    <ul class="page_menu_selection">
+                                        <li><a href="#">Super Deals</a></li>                                    
+                                        <li><a href="#">Menu Item</a></li>
+                                        <li><a href="#">Menu Item</a></li>
+                                        <li><a href="#">Menu Item</a></li>
+                                    </ul>
+                                </li>
+                                <li class="page_menu_item"><a href="{% url 'cart_details' %}">Cart</a></li>                           
+                                <li class="page_menu_item"><a href="{% url 'Shop' %}">Shop</a></li>                           
+                                <li class="page_menu_item"><a href="{% url 'Blog' %}">blog</a></li>
+                                <li class="page_menu_item"><a href="{% url 'Contact' %}">contact</a></li>
+                                                             
+                                {% if user.id is not None %}                                    
+                                <li class="page_menu_item"><a href="{% url 'userprofile' %}" >hi {{request.user.username}}</a></li>
+                                <li class="page_menu_item"><a href="{% url 'user_logout' %}">Logout</a></li>
+                                <li class="page_menu_item"><a href="{% url 'OrderCart' %}">Checkout</a></li>
+                                {% else %}                              
+                                <li class="page_menu_item"><a href="{% url 'user_login' %}" >SignIn/SignUp</a></li>
+                                <li class="page_menu_item"><a href="{% url 'user_register' %}" >Register</a></li>
+                                {% endif %}
+                                   
+                               
+                            </ul>
+                            <div class="menu_contact">
+                                <div class="menu_contact_item">
+                                    <div class="menu_contact_icon"><img src="{% static 'images/phone_white.png' %}" alt=""></div>
+                                    +8801733493563
+                                </div>
+                                <div class="menu_contact_item">
+                                    <div class="menu_contact_icon"><img src="{% static 'images/mail_white.png' %}" alt=""></div><a
+                                        href=""><span
+                                            class="__cf_email__"
+                                            data-cfemail="f39592808780929f9680b3949e929a9fdd909c9e">nayonhawlader.bd@gmail.com</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% block midcontent %}
+      
+   
+
+     <div class="banner">            
+            {% for banner in banners %}                
+            <div class="banner_background" style="background-image:url({{banner.banner_background.url}})"></div>
+            <div class="container fill_height">
+                <div class="row fill_height">
+                    <div class="banner_product_image"><img src="{{banner.product_photo.url}}" alt=""></div>
+                    <div class="col-lg-5 offset-lg-4 fill_height">
+                        <div class="banner_content">
+                            <h1 class="banner_text">{{banner.banner_title}}</h1>
+                            <div class="banner_price"><span><strike>${{banner.product_price_before}}</strike></span>${{banner.current_price}}</div>
+                            <div class="banner_product_name">{{banner.brand_name}}</div>
+                            <div class="button banner_button"><a href="#">Shop Now</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="characteristics">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 char_col">
+                        <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="char_icon"><img src="{% static 'images/char_1.png' %}" alt=""></div>
+                            <div class="char_content">
+                                <div class="char_title">Free Delivery</div>
+                                <div class="char_subtitle">from $50</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 char_col">
+                        <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="char_icon"><img src="{% static 'images/char_2.png' %}" alt=""></div>
+                            <div class="char_content">
+                                <div class="char_title">Quick Response</div>
+                                <div class="char_subtitle">from $50</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 char_col">
+                        <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="char_icon"><img src="{% static 'images/char_3.png' %}" alt=""></div>
+                            <div class="char_content">
+                                <div class="char_title">Easy Pay</div>
+                                <div class="char_subtitle">from $50</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 char_col">
+                        <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="char_icon"><img src="{% static 'images/char_4.png' %}" alt=""></div>
+                            <div class="char_content">
+                                <div class="char_title">Hot Discount</div>
+                                <div class="char_subtitle">from $50</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="deals_featured">
+            <div class="container">
+                <div class="row">
+                    <div class="col d-flex flex-lg-row flex-column align-items-center justify-content-start">
+
+                        <div class="deals">
+                            <div class="deals_title">Deals of the Week</div>
+                            <div class="deals_slider_container">
+
+                                <div class="owl-carousel owl-theme deals_slider">
+                                    {% for weakly_deal in weakly_deals %}
+                                      
+                                   
+
+                                    <div class="owl-item deals_item">
+                                        <div class="deals_image"><img src="{{weakly_deal.product_photo.url}}" alt=""></div>
+                                        <div class="deals_content">
+                                            <div class="deals_info_line d-flex flex-row justify-content-start">
+                                                <div class="deals_item_category"><a href="#">{{weakly_deal.product_category}}</a></div>
+                                                <div class="deals_item_price_a ml-auto">{{weakly_deal.product_price}}</div>
+                                            </div>
+                                            <div class="deals_info_line d-flex flex-row justify-content-start">
+                                                <div class="deals_item_name">{{weakly_deal.brand_name}}</div>
+                                                <div class="deals_item_price ml-auto">{{weakly_deal.deal_price}}</div>
+                                            </div>
+                                            <div class="available">
+                                                <div class="available_line d-flex flex-row justify-content-start">
+                                                    <div class="available_title">{{weakly_deal.availablity}} : <span>{{weakly_deal.available_number}}</span></div>
+                                                    <div class="sold_title ml-auto">Already Sold : <span>{{weakly_deal.already_sold}}</span></div>
+                                                </div>
+                                                <div class="available_bar"><span style="width:17%"></span></div>
+                                            </div>
+                                            <div
+                                                class="deals_timer d-flex flex-row align-items-center justify-content-start">
+                                                <div class="deals_timer_title_container">
+                                                    <div class="deals_timer_title">Hurry Up</div>
+                                                    <div class="deals_timer_subtitle">Offer ends in:</div>
+                                                </div>
+                                                <div class="deals_timer_content ml-auto">
+                                                    <div class="deals_timer_box clearfix" data-target-time="">
+                                                        <div class="deals_timer_unit">
+                                                            <div id="deals_timer1_hr" class="deals_timer_hr"></div>
+                                                            <span>hours</span>
+                                                        </div>
+                                                        <div class="deals_timer_unit">
+                                                            <div id="deals_timer1_min" class="deals_timer_min"></div>
+                                                            <span>mins</span>
+                                                        </div>
+                                                        <div class="deals_timer_unit">
+                                                            <div id="deals_timer1_sec" class="deals_timer_sec"></div>
+                                                            <span>secs</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="deals_slider_nav_container">
+                                <div class="deals_slider_prev deals_slider_nav"><i
+                                        class="fas fa-chevron-left ml-auto"></i></div>
+                                <div class="deals_slider_next deals_slider_nav"><i
+                                        class="fas fa-chevron-right ml-auto"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="featured">
+                            <div class="tabbed_container">
+                                <div class="tabs">
+                                    <ul class="clearfix">
+                                        <li class="active">Featured</li>
+                                        <li>On Sale</li>
+                                        <li>Best Rated</li>
+                                    </ul>
+                                    <div class="tabs_line"><span></span></div>
+                                </div>
+                               
+                                <div class="product_panel panel active">
+                                    <div class="arrivals_slider slider">
+
+                                        
+                                      {% for featured_product in featured_products %}
+                                        <div class="arrivals_slider_item" id="featured-slider">
+                                            <div class="border_active"></div>
+                                            <div
+                                                class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                                <div
+                                                    class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                    <img src="{{featured_product.product_photo_main.url}}" alt=""></div>
+                                                <div class="product_content">
+                                                    <div class="product_price discount">
+                                                                            ${{featured_product.current_price}}                                                                            
+                                                                                {% if featured_product.product_price_before == 0 %}
+                                                                                    <span></span>
+                                                                                    {% elif featured_product.product_price_before == current_price %}
+                                                                                        <span>
+                                                                                            ${{featured_product.current_price}}
+                                                                                        </span>
+                                                                                    {% elif featured_product.product_price_before > featured_product.current_price %}
+                                                                                        <span>
+                                                                                            ${{featured_product.product_price_before}}
+                                                                                        </span>                                                                                        
+                                                                                {% endif %}
+                                                    </div>
+                                                    <div class="product_name">
+                                                        <div><a href="{% url 'product_single' id=featured_product.id  %}">{{featured_product.brand_name}}</a></div>
+                                                    </div>
+                                                    <div class="product_extras">
+                                                        <div class="product_color">
+                                                            <input type="radio" checked name="product_color"
+                                                                style="background:#b19c83">
+                                                            <input type="radio" name="product_color"
+                                                                style="background:#000000">
+                                                            <input type="radio" name="product_color"
+                                                                style="background:#999999">
+                                                        </div>
+                                                       <a href="{% url 'Add_to_Shoping_cart' id=featured_product.id %}"><button class="product_cart_button">Add to Cart</button></a> 
+                                                    </div>
+                                                </div>
+                                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                <ul class="product_marks">
+                                                    {% if featured_product.new == True %}
+                                                                        <li class="product_mark product_new">new</li>                                                                        
+                                                                    {% endif %}
+                                                                   
+                                                                                                                                 
+                                                                        {% if featured_product.total_discount == 10 %}                                                                  
+                                                                           <li class="product_mark product_discount">-10%</li>
+                                                                           {% elif featured_product.total_discount == 20 %}
+                                                                           <li class="product_mark product_discount">-20%</li>
+                                                                           {% elif featured_product.total_discount == 30 %}
+                                                                           <li class="product_mark product_discount">-30%</li>
+                                                                           {% elif featured_product.total_discount == 40 %}
+                                                                           <li class="product_mark product_discount">-40%</li>
+                                                                           {% elif featured_product.total_discount == 50 %}
+                                                                           <li class="product_mark product_discount">-50%</li>                                                                           
+                                                                           {% else %}
+                                                                           <li class="product_mark product_discount" style="display: none;"></li>
+                                                                        {% endif %}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                      {% endfor %}
+                                    </div>
+                                    <div class="arrivals_slider_dots_cover"></div>
+                                </div>
+                                <div class="product_panel panel">
+                                    <div class="arrivals_slider slider">
+
+                                        
+                                      {% for featured_product in featured_products %}
+                                        <div class="arrivals_slider_item" id="featured-slider">
+                                            <div class="border_active"></div>
+                                            <div
+                                                class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                                <div
+                                                    class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                    <img src="{{featured_product.product_photo_main.url}}" alt=""></div>
+                                                <div class="product_content">
+                                                    <div class="product_price discount">
+                                                                            ${{featured_product.current_price}}                                                                            
+                                                                                {% if featured_product.product_price_before == 0 %}
+                                                                                    <span></span>
+                                                                                    {% elif featured_product.product_price_before == current_price %}
+                                                                                        <span>
+                                                                                            ${{featured_product.current_price}}
+                                                                                        </span>
+                                                                                    {% elif featured_product.product_price_before > featured_product.current_price %}
+                                                                                        <span>
+                                                                                            ${{featured_product.product_price_before}}
+                                                                                        </span>                                                                                        
+                                                                                {% endif %}
+                                                    </div>
+                                                    <div class="product_name">
+                                                        <div><a href="{% url 'product_single' id=featured_product.id  %}">{{featured_product.brand_name}}</a></div>
+                                                    </div>
+                                                    <div class="product_extras">
+                                                        <div class="product_color">
+                                                            <input type="radio" checked name="product_color"
+                                                                style="background:#b19c83">
+                                                            <input type="radio" name="product_color"
+                                                                style="background:#000000">
+                                                            <input type="radio" name="product_color"
+                                                                style="background:#999999">
+                                                        </div>
+                                                       <a href="{% url 'Add_to_Shoping_cart' id=featured_product.id %}"><button class="product_cart_button">Add to Cart</button></a> 
+                                                    </div>
+                                                </div>
+                                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                <ul class="product_marks">
+                                                    {% if featured_product.new == True %}
+                                                                        <li class="product_mark product_new">new</li>                                                                        
+                                                                    {% endif %}
+                                                                   
+                                                                                                                                 
+                                                                        {% if featured_product.total_discount == 10 %}                                                                  
+                                                                           <li class="product_mark product_discount">-10%</li>
+                                                                           {% elif featured_product.total_discount == 20 %}
+                                                                           <li class="product_mark product_discount">-20%</li>
+                                                                           {% elif featured_product.total_discount == 30 %}
+                                                                           <li class="product_mark product_discount">-30%</li>
+                                                                           {% elif featured_product.total_discount == 40 %}
+                                                                           <li class="product_mark product_discount">-40%</li>
+                                                                           {% elif featured_product.total_discount == 50 %}
+                                                                           <li class="product_mark product_discount">-50%</li>                                                                           
+                                                                           {% else %}
+                                                                           <li class="product_mark product_discount" style="display: none;"></li>
+                                                                        {% endif %}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                      {% endfor %}
+                                    </div>
+                                    <div class="arrivals_slider_dots_cover"></div>
+                                </div>
+                                <div class="product_panel panel">
+                                    <div class="arrivals_slider slider">
+
+                                        
+                                      {% for featured_product in featured_products %}
+                                        <div class="arrivals_slider_item" id="featured-slider">
+                                            <div class="border_active"></div>
+                                            <div
+                                                class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                                <div
+                                                    class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                    <img src="{{featured_product.product_photo_main.url}}" alt=""></div>
+                                                <div class="product_content">
+                                                    <div class="product_price discount">
+                                                                            ${{featured_product.current_price}}                                                                            
+                                                                                {% if featured_product.product_price_before == 0 %}
+                                                                                    <span></span>
+                                                                                    {% elif featured_product.product_price_before == current_price %}
+                                                                                        <span>
+                                                                                            ${{featured_product.current_price}}
+                                                                                        </span>
+                                                                                    {% elif featured_product.product_price_before > featured_product.current_price %}
+                                                                                        <span>
+                                                                                            ${{featured_product.product_price_before}}
+                                                                                        </span>                                                                                        
+                                                                                {% endif %}
+                                                    </div>
+                                                    <div class="product_name">
+                                                        <div><a href="{% url 'product_single' id=featured_product.id  %}">{{featured_product.brand_name}}</a></div>
+                                                    </div>
+                                                    <div class="product_extras">
+                                                        <div class="product_color">
+                                                            <input type="radio" checked name="product_color"
+                                                                style="background:#b19c83">
+                                                            <input type="radio" name="product_color"
+                                                                style="background:#000000">
+                                                            <input type="radio" name="product_color"
+                                                                style="background:#999999">
+                                                        </div>
+                                                       <a href="{% url 'Add_to_Shoping_cart' id=featured_product.id %}"><button class="product_cart_button">Add to Cart</button></a> 
+                                                    </div>
+                                                </div>
+                                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                <ul class="product_marks">
+                                                    {% if featured_product.new == True %}
+                                                                        <li class="product_mark product_new">new</li>                                                                        
+                                                                    {% endif %}
+                                                                   
+                                                                                                                                 
+                                                                        {% if featured_product.total_discount == 10 %}                                                                  
+                                                                           <li class="product_mark product_discount">-10%</li>
+                                                                           {% elif featured_product.total_discount == 20 %}
+                                                                           <li class="product_mark product_discount">-20%</li>
+                                                                           {% elif featured_product.total_discount == 30 %}
+                                                                           <li class="product_mark product_discount">-30%</li>
+                                                                           {% elif featured_product.total_discount == 40 %}
+                                                                           <li class="product_mark product_discount">-40%</li>
+                                                                           {% elif featured_product.total_discount == 50 %}
+                                                                           <li class="product_mark product_discount">-50%</li>                                                                           
+                                                                           {% else %}
+                                                                           <li class="product_mark product_discount" style="display: none;"></li>
+                                                                        {% endif %}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                      {% endfor %}
+                                    </div>
+                                    <div class="arrivals_slider_dots_cover"></div>
+                                </div>
+                     
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popular_categories">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="popular_categories_content">
+                            <div class="popular_categories_title">Popular Categories</div>
+                            <div class="popular_categories_slider_nav">
+                                <div class="popular_categories_prev popular_categories_nav"><i
+                                        class="fas fa-angle-left ml-auto"></i></div>
+                                <div class="popular_categories_next popular_categories_nav"><i
+                                        class="fas fa-angle-right ml-auto"></i></div>
+                            </div>
+                            <div class="popular_categories_link"><a href="#">full catalog</a></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9">
+                        <div class="popular_categories_slider_container">
+                            <div class="owl-carousel owl-theme popular_categories_slider">
+
+                                <div class="owl-item">
+                                    <div
+                                        class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                        <div class="popular_category_image"><img src="{% static 'images/popular_1.png' %}" alt="">
+                                        </div>
+                                        <div class="popular_category_text">Smartphones & Tablets</div>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item">
+                                    <div
+                                        class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                        <div class="popular_category_image"><img src="{% static 'images/popular_2.png' %}" alt="">
+                                        </div>
+                                        <div class="popular_category_text">Computers & Laptops</div>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item">
+                                    <div
+                                        class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                        <div class="popular_category_image"><img src="{% static 'images/popular_3.png' %}" alt="">
+                                        </div>
+                                        <div class="popular_category_text">Gadgets</div>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item">
+                                    <div
+                                        class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                        <div class="popular_category_image"><img src="{% static 'images/popular_4.png' %}" alt="">
+                                        </div>
+                                        <div class="popular_category_text">Video Games & Consoles</div>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item">
+                                    <div
+                                        class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                        <div class="popular_category_image"><img src="{% static 'images/popular_5.png' %}" alt="">
+                                        </div>
+                                        <div class="popular_category_text">Accessories</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="banner_2">
+            <div class="banner_2_background" style="background-image:url(/static/images/banner_2_background.jpg)"></div>
+            <div class="banner_2_container">
+                <div class="banner_2_dots"></div>
+
+                <div class="owl-carousel owl-theme banner_2_slider">
+
+                    <div class="owl-item">
+                        <div class="banner_2_item">
+                            <div class="container fill_height">
+                                <div class="row fill_height">
+                                    <div class="col-lg-4 col-md-6 fill_height">
+                                        <div class="banner_2_content">
+                                            <div class="banner_2_category">Laptops</div>
+                                            <div class="banner_2_title">MacBook Air 13</div>
+                                            <div class="banner_2_text">Lorem ipsum dolor sit amet, consectetur
+                                                adipiscing elit. Maecenas fermentum laoreet.</div>
+                                            <div class="rating_r rating_r_4 banner_2_rating">
+                                                <i></i><i></i><i></i><i></i><i></i></div>
+                                            <div class="button banner_2_button"><a href="#">Explore</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-6 fill_height">
+                                        <div class="banner_2_image_container">
+                                            <div class="banner_2_image"><img src="{% static 'images/banner_2_product.png' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="owl-item">
+                        <div class="banner_2_item">
+                            <div class="container fill_height">
+                                <div class="row fill_height">
+                                    <div class="col-lg-4 col-md-6 fill_height">
+                                        <div class="banner_2_content">
+                                            <div class="banner_2_category">Laptops</div>
+                                            <div class="banner_2_title">MacBook Air 13</div>
+                                            <div class="banner_2_text">Lorem ipsum dolor sit amet, consectetur
+                                                adipiscing elit. Maecenas fermentum laoreet.</div>
+                                            <div class="rating_r rating_r_4 banner_2_rating">
+                                                <i></i><i></i><i></i><i></i><i></i></div>
+                                            <div class="button banner_2_button"><a href="#">Explore</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-6 fill_height">
+                                        <div class="banner_2_image_container">
+                                            <div class="banner_2_image"><img src="{% static 'images/banner_2_product.png' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="owl-item">
+                        <div class="banner_2_item">
+                            <div class="container fill_height">
+                                <div class="row fill_height">
+                                    <div class="col-lg-4 col-md-6 fill_height">
+                                        <div class="banner_2_content">
+                                            <div class="banner_2_category">Laptops</div>
+                                            <div class="banner_2_title">MacBook Air 13</div>
+                                            <div class="banner_2_text">Lorem ipsum dolor sit amet, consectetur
+                                                adipiscing elit. Maecenas fermentum laoreet.</div>
+                                            <div class="rating_r rating_r_4 banner_2_rating">
+                                                <i></i><i></i><i></i><i></i><i></i></div>
+                                            <div class="button banner_2_button"><a href="#">Explore</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-6 fill_height">
+                                        <div class="banner_2_image_container">
+                                            <div class="banner_2_image"><img src="{% static 'images/banner_2_product.png' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="new_arrivals">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="tabbed_container">
+                            <div class="tabs clearfix tabs-right">
+                                <div class="new_arrivals_title">Hot New Arrivals</div>
+                                <ul class="clearfix">
+                                    <li class="active">Featured</li>
+                                    <li>Audio & Video</li>
+                                    <li>Laptops & Computers</li>
+                                </ul>
+                                <div class="tabs_line"><span></span></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-9" style="z-index:1;">
+
+                                    <div class="product_panel panel active">
+                                        <div class="arrivals_slider slider">
+
+                                            
+                                          {% for arrival in arrivals %}
+                                            <div class="arrivals_slider_item">
+                                                <div class="border_active"></div>
+                                                <div
+                                                    class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                                    <div
+                                                        class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                        <img src="{{arrival.product_photo_main.url}}" alt=""></div>
+                                                    <div class="product_content">
+                                                        <div class="product_price">${{arrival.current_price}}</div>
+                                                        <div class="product_name">
+                                                            <div><a href="product.html">{{arrival.brand_name}}</a></div>
+                                                        </div>
+                                                        <div class="product_extras">
+                                                            <div class="product_color">
+                                                                <input type="radio" checked name="product_color"
+                                                                    style="background:#b19c83">
+                                                                <input type="radio" name="product_color"
+                                                                    style="background:#000000">
+                                                                <input type="radio" name="product_color"
+                                                                    style="background:#999999">
+                                                            </div>
+                                                            <button class="product_cart_button">Add to Cart</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                    <ul class="product_marks">
+                                                        <li class="product_mark product_discount"></li>
+                                                        <li class="product_mark product_new">new</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                          {% endfor %}
+                                        </div>
+                                        <div class="arrivals_slider_dots_cover"></div>
+                                    </div>
+
+                                    <div class="product_panel panel">
+                                        <div class="arrivals_slider slider">
+                                            
+                                            {% for arrival in arrivals %}
+                                            <div class="arrivals_slider_item">
+                                                <div class="border_active"></div>
+                                                <div
+                                                    class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                                    <div
+                                                        class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                        <img src="{{arrival.product_photo_main.url}}" alt=""></div>
+                                                    <div class="product_content">
+                                                        <div class="product_price">${{arrival.current_price}}</div>
+                                                        <div class="product_name">
+                                                            <div><a href="product.html">{{arrival.brand_name}}</a></div>
+                                                        </div>
+                                                        <div class="product_extras">
+                                                            <div class="product_color">
+                                                                <input type="radio" checked name="product_color"
+                                                                    style="background:#b19c83">
+                                                                <input type="radio" name="product_color"
+                                                                    style="background:#000000">
+                                                                <input type="radio" name="product_color"
+                                                                    style="background:#999999">
+                                                            </div>
+                                                            <button class="product_cart_button">Add to Cart</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                    <ul class="product_marks">
+                                                        <li class="product_mark product_discount"></li>
+                                                        <li class="product_mark product_new">new</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                          {% endfor %}            
+                                        </div>
+                                        <div class="arrivals_slider_dots_cover"></div>
+                                    </div>
+
+                                    <div class="product_panel panel">
+                                        <div class="arrivals_slider slider">
+                                          
+                                              
+                                          {% for arrival in arrivals %}
+                                          <div class="arrivals_slider_item">
+                                              <div class="border_active"></div>
+                                              <div
+                                                  class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                                  <div
+                                                      class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                      <img src="{{arrival.product_photo_main.url}}" alt=""></div>
+                                                  <div class="product_content">
+                                                      <div class="product_price">${{arrival.current_price}}</div>
+                                                      <div class="product_name">
+                                                          <div><a href="product.html">{{arrival.brand_name}}</a></div>
+                                                      </div>
+                                                      <div class="product_extras">
+                                                          <div class="product_color">
+                                                              <input type="radio" checked name="product_color"
+                                                                  style="background:#b19c83">
+                                                              <input type="radio" name="product_color"
+                                                                  style="background:#000000">
+                                                              <input type="radio" name="product_color"
+                                                                  style="background:#999999">
+                                                          </div>
+                                                          <button class="product_cart_button">Add to Cart</button>
+                                                      </div>
+                                                  </div>
+                                                  <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                  <ul class="product_marks">
+                                                      <li class="product_mark product_discount"></li>
+                                                      <li class="product_mark product_new">new</li>
+                                                  </ul>
+                                              </div>
+                                          </div>
+
+                                        {% endfor %}
+
+                          
+                                        </div>
+                                        <div class="arrivals_slider_dots_cover"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="arrivals_single clearfix">
+                                        <div class="d-flex flex-column align-items-center justify-content-center">
+                                            <div class="arrivals_single_image"><img src="{% static 'images/new_single.png' %}" alt="">
+                                            </div>
+                                            <div class="arrivals_single_content">
+                                                <div class="arrivals_single_category"><a href="#">Smartphones</a></div>
+                                                <div class="arrivals_single_name_container clearfix">
+                                                    <div class="arrivals_single_name"><a href="#">LUNA Smartphone</a>
+                                                    </div>
+                                                    <div class="arrivals_single_price text-right">$379</div>
+                                                </div>
+                                                <div class="rating_r rating_r_4 arrivals_single_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <form action="#"><button class="arrivals_single_button">Add to
+                                                        Cart</button></form>
+                                            </div>
+                                            <div class="arrivals_single_fav product_fav active"><i
+                                                    class="fas fa-heart"></i></div>
+                                            <ul class="arrivals_single_marks product_marks">
+                                                <li class="arrivals_single_mark product_mark product_new">new</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="best_sellers">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="tabbed_container">
+                            <div class="tabs clearfix tabs-right">
+                                <div class="new_arrivals_title">Hot Best Sellers</div>
+                                <ul class="clearfix">
+                                    <li class="active">Top 20</li>
+                                    <li>Audio & Video</li>
+                                    <li>Laptops & Computers</li>
+                                </ul>
+                                <div class="tabs_line"><span></span></div>
+                            </div>
+                            <div class="bestsellers_panel panel active">
+
+                                <div class="bestsellers_slider slider">
+                                                       		
+                                {% for best_seler in best_selers %}
+                                
+
+                                <div class="bestsellers_item discount">
+                                    <div class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                    <div class="bestsellers_image"><img src="{{best_seler.product_photo_main.url}}" alt=""></div>
+                                    <div class="bestsellers_content">
+                                        <div class="bestsellers_category"><a href="#">{{best_seler.product_category}}</a></div>
+                                        <div class="bestsellers_name"><a href="{% url 'product_single' id=best_seler.id %}">{{best_seler.brand_name}}</a></div>
+                                        {% if best_seler.average_review == 5.0 %}   
+                                            <div class="rating_r rating_r_5 bestsellers_rating">         
+                                            <i></i><i></i><i></i><i></i><i></i>           
+                                            </div>
+                                        {% endif %}
+                                        {% if best_seler.average_review == 4.0 %}   
+                                            <div class="rating_r rating_r_4 bestsellers_rating">         
+                                                <i></i><i></i><i></i><i></i><i></i>          
+                                            </div>
+                                        {% endif %}
+                                        {% if best_seler.average_review == 3.0 %}   
+                                            <div class="rating_r rating_r_3 bestsellers_rating">         
+                                            <i></i><i></i><i></i><i></i><i></i>         
+                                            </div>
+                                        {% endif %}
+                                        {% if best_seler.average_review == 2.0 %}   
+                                            <div class="rating_r rating_r_2 bestsellers_rating">         
+                                                <i></i><i></i><i></i><i></i><i></i>         
+                                            </div>
+                                        {% endif %}
+                                        {% if best_seler.average_review == 1.0 %}   
+                                            <div class="rating_r rating_r_1 bestsellers_rating">         
+                                            <i></i><i></i><i></i><i></i><i></i>          
+                                            </div>
+                                        {% endif %}
+                                        {% if best_seler.average_review == 0.0 %}   
+                                            <div class="rating_r rating_r_0 bestsellers_rating">         
+                                                <i></i><i></i><i></i><i></i><i></i>     
+                                            </div>
+                                        {% endif %}
+
+                                            <div>
+                                        <div class="bestsellers_price discount">
+                                                
+                                            ${{best_seler.current_price}}                                                                            
+                                            {% if best_seler.product_price_before == 0 %}
+                                                <span></span>
+                                                {% elif best_seler.product_price_before == current_price %}
+                                                    <span>
+                                                        ${{best_seler.current_price}}
+                                                    </span>
+                                                {% elif best_seler.product_price_before > best_seler.current_price %}
+                                                    <span>
+                                                        ${{best_seler.product_price_before}}
+                                                    </span>                                                                                        
+                                            {% endif %}
+                                        
+                                        
+                                        </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    </div>
+                                    <ul class="bestsellers_marks">
+                                    
+                                        {% if best_seler.new == True %}
+                                        <li class="bestsellers_mark bestsellers_new" style="display: block;">new</li>                                                                        
+                                    {% endif %}
+                                    
+                                        {% if best_seler.discount == True %}                                                                                            
+                                                {% if best_seler.total_discount == 10 %}                                                                  
+                                                <li class="bestsellers_mark bestsellers_discount">-10%</li>
+                                                {% elif best_seler.total_discount == 20 %}
+                                                <li class="bestsellers_mark bestsellers_discount">-20%</li>
+                                                {% elif best_seler.total_discount == 30 %}
+                                                <li class="bestsellers_mark bestsellers_discount">-30%</li>
+                                                {% elif best_seler.total_discount == 40 %}
+                                                <li class="bestsellers_mark bestsellers_discount">-40%</li>
+                                                {% elif best_seler.total_discount == 50 %}
+                                                <li class="bestsellers_mark bestsellers_discount">-50%</li>                                                                           
+                                                {% else %}
+                                                <li class="bestsellers_mark bestsellers_discount" style="display: none;"></li>
+                                                {% endif %}
+                                            {% endif %}                 
+                                    </ul>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                </div>
+                                {% endfor %}                
+                                {% for best_seler in best_selers_two %}
+                                
+
+                                <div class="bestsellers_item discount">
+                                    <div class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                    <div class="bestsellers_image"><img src="{{best_seler.product_photo_main.url}}" alt=""></div>
+                                    <div class="bestsellers_content">
+                                        <div class="bestsellers_category"><a href="#">{{best_seler.product_category}}</a></div>
+                                        <div class="bestsellers_name"><a href="{% url 'product_single' id=best_seler.id %}">{{best_seler.brand_name}}</a></div>
+                                        {% if best_seler.average_reviews == 5.0 %}   
+                                            <div class="rating_r rating_r_5 bestsellers_rating">         
+                                            <i></i><i></i><i></i><i></i><i></i>           
+                                            </div>
+                                        {% endif %}
+                                        {% if best_seler.average_reviews == 4.0 %}   
+                                            <div class="rating_r rating_r_4 bestsellers_rating">         
+                                                <i></i><i></i><i></i><i></i><i></i>          
+                                            </div>
+                                        {% endif %}
+                                        {% if best_seler.average_reviews == 3.0 %}   
+                                            <div class="rating_r rating_r_3 bestsellers_rating">         
+                                            <i></i><i></i><i></i><i></i><i></i>         
+                                            </div>
+                                        {% endif %}
+                                        {% if best_seler.average_reviews == 2.0 %}   
+                                            <div class="rating_r rating_r_2 bestsellers_rating">         
+                                                <i></i><i></i><i></i><i></i><i></i>         
+                                            </div>
+                                        {% endif %}
+                                        {% if best_seler.average_reviews == 1.0 %}   
+                                            <div class="rating_r rating_r_1 bestsellers_rating">         
+                                            <i></i><i></i><i></i><i></i><i></i>          
+                                            </div>
+                                        {% endif %}
+                                        {% if best_seler.average_reviews == 0.0 %}   
+                                            <div class="rating_r rating_r_0 bestsellers_rating">         
+                                                <i></i><i></i><i></i><i></i><i></i>     
+                                            </div>
+                                        {% endif %}
+
+                                            <div>
+                                        <div class="bestsellers_price discount">
+                                                
+                                            ${{best_seler.current_price}}                                                                            
+                                            {% if best_seler.product_price_before == 0 %}
+                                                <span></span>
+                                                {% elif best_seler.product_price_before == current_price %}
+                                                    <span>
+                                                        ${{best_seler.current_price}}
+                                                    </span>
+                                                {% elif best_seler.product_price_before > best_seler.current_price %}
+                                                    <span>
+                                                        ${{best_seler.product_price_before}}
+                                                    </span>                                                                                        
+                                            {% endif %}
+                                        
+                                        
+                                        </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    </div>
+                                    <ul class="bestsellers_marks">
+                                    
+                                        {% if best_seler.new == True %}
+                                        <li class="bestsellers_mark bestsellers_new" style="display: block;">new</li>                                                                        
+                                    {% endif %}
+                                    
+                                        {% if best_seler.discount == True %}                                                                                            
+                                                {% if best_seler.total_discount == 10 %}                                                                  
+                                                <li class="bestsellers_mark bestsellers_discount">-10%</li>
+                                                {% elif best_seler.total_discount == 20 %}
+                                                <li class="bestsellers_mark bestsellers_discount">-20%</li>
+                                                {% elif best_seler.total_discount == 30 %}
+                                                <li class="bestsellers_mark bestsellers_discount">-30%</li>
+                                                {% elif best_seler.total_discount == 40 %}
+                                                <li class="bestsellers_mark bestsellers_discount">-40%</li>
+                                                {% elif best_seler.total_discount == 50 %}
+                                                <li class="bestsellers_mark bestsellers_discount">-50%</li>                                                                           
+                                                {% else %}
+                                                <li class="bestsellers_mark bestsellers_discount" style="display: none;"></li>
+                                                {% endif %}
+                                            {% endif %}                 
+                                    </ul>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                </div>
+                                {% endfor %}                
+                                </div>
+                            </div>
+                            <div class="bestsellers_panel panel">
+
+                                <div class="bestsellers_slider slider">
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_1.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_2.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_3.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src=" {% static 'images/best_4.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_5.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_6.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                                <div class="bestsellers_image"><img src="{% static 'images/best_1.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                                <div class="bestsellers_image"><img src="{% static 'images/best_2.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_3.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_4.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_5.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_6.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bestsellers_panel panel">
+
+                                <div class="bestsellers_slider slider">
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_1.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_2.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_3.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_4.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_5.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_6.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_1.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_2.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_3.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_4.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item discount">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_5.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bestsellers_item">
+                                        <div
+                                            class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="{% static 'images/best_6.png' %}" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note
+                                                        4</a></div>
+                                                <div class="rating_r rating_r_4 bestsellers_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="bestsellers_price discount">$225<span>$300</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                            <li class="bestsellers_mark bestsellers_new">new</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="adverts">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 advert_col">
+                        <div class="advert d-flex flex-row align-items-center justify-content-start">
+                            <div class="advert_content">
+                                <div class="advert_title"><a href="#">Trends 2018</a></div>
+                                <div class="advert_text">Lorem ipsum dolor sit amet, consectetur adipiscing Donec et.
+                                </div>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="advert_image"><img src="{% static 'images/adv_1.png' %}" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 advert_col">
+
+                        <div class="advert d-flex flex-row align-items-center justify-content-start">
+                            <div class="advert_content">
+                                <div class="advert_subtitle">Trends 2018</div>
+                                <div class="advert_title_2"><a href="#">Sale -45%</a></div>
+                                <div class="advert_text">Lorem ipsum dolor sit amet, consectetur.</div>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="advert_image"><img src="{% static 'images/adv_2.png' %}" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 advert_col">
+
+                        <div class="advert d-flex flex-row align-items-center justify-content-start">
+                            <div class="advert_content">
+                                <div class="advert_title"><a href="#">Trends 2018</a></div>
+                                <div class="advert_text">Lorem ipsum dolor sit amet, consectetur.</div>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="advert_image"><img src="{% static 'images/adv_3.png' %}" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="trends">
+            <div class="trends_background"></div>
+            <div class="trends_overlay"></div>
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3">
+                        <div class="trends_container">
+                            <h2 class="trends_title">Trends Now</h2>
+                            <div class="trends_text">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing Donec et.</p>
+                            </div>
+                            <div class="trends_slider_nav">
+                                <div class="trends_prev trends_nav"><i class="fas fa-angle-left ml-auto"></i></div>
+                                <div class="trends_next trends_nav"><i class="fas fa-angle-right ml-auto"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9">
+                        <div class="trends_slider_container">
+
+                            <div class="owl-carousel owl-theme trends_slider">
+                            {% for trends in trend %}
+                                <div class="owl-item">
+                                    <div class="trends_item is_new">
+                                        <div
+                                            class="trends_image d-flex flex-column align-items-center justify-content-center">
+                                            <img src="{{trends.product_photo_main.url}}" alt=""></div>
+                                        <div class="trends_content">
+                                            <div class="trends_category"><a href="{% url 'single_product_pro' id=trends.id %}">{{trends.product_category}}</a></div>
+                                            <div class="trends_info clearfix">
+                                                <div class="trends_name"><a href="{% url 'single_product_pro' id=trends.id %}">{{trends.brand_name}}</a></div>
+                                                <div class="trends_price">${{trends.current_price}}</div>
+                                            </div>
+                                        </div>
+                                        <ul class="trends_marks">
+                                            <li class="trends_mark trends_discount">
+                                                ${{trends.current_price}}                                                                            
+                                                {% if trends.product_price_before == 0 %}
+                                                    <span></span>
+                                                    {% elif trends.product_price_before == current_price %}
+                                                        <span>
+                                                            ${{trends.current_price}}
+                                                        </span>
+                                                    {% elif trends.product_price_before > featured_product.current_price %}
+                                                        <span>
+                                                            ${{trends.product_price_before}}
+                                                        </span>                                                                                        
+                                                {% endif %}
+                                            </li>
+                                            {% if trends.new == True %}
+                                            <li class="trends_mark trends_new">new</li>
+                                            {% endif %}
+                                        </ul>
+                                        <div class="trends_fav"><i class="fas fa-heart"></i></div>
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="reviews_title_container">
+                            <h3 class="reviews_title">Latest Reviews</h3>
+                            <div class="reviews_all ml-auto"><a href="#">view all <span>reviews</span></a></div>
+                        </div>
+                        <div class="reviews_slider_container">
+
+                            <div class="owl-carousel owl-theme reviews_slider">
+
+                                <div class="owl-item">
+                                    <div class="review d-flex flex-row align-items-start justify-content-start">
+                                        <div>
+                                            <div class="review_image"><img src="{% static 'images/review_1.jpg' %}" alt=""></div>
+                                        </div>
+                                        <div class="review_content">
+                                            <div class="review_name">Roberto Sanchez</div>
+                                            <div class="review_rating_container">
+                                                <div class="rating_r rating_r_4 review_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="review_time">2 day ago</div>
+                                            </div>
+                                            <div class="review_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+                                                    fermentum laoreet.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item">
+                                    <div class="review d-flex flex-row align-items-start justify-content-start">
+                                        <div>
+                                            <div class="review_image"><img src="{% static 'images/review_2.jpg' %}" alt=""></div>
+                                        </div>
+                                        <div class="review_content">
+                                            <div class="review_name">Brandon Flowers</div>
+                                            <div class="review_rating_container">
+                                                <div class="rating_r rating_r_4 review_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="review_time">2 day ago</div>
+                                            </div>
+                                            <div class="review_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+                                                    fermentum laoreet.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item">
+                                    <div class="review d-flex flex-row align-items-start justify-content-start">
+                                        <div>
+                                            <div class="review_image"><img src="{% static 'images/review_3.jpg' %}" alt=""></div>
+                                        </div>
+                                        <div class="review_content">
+                                            <div class="review_name">Emilia Clarke</div>
+                                            <div class="review_rating_container">
+                                                <div class="rating_r rating_r_4 review_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="review_time">2 day ago</div>
+                                            </div>
+                                            <div class="review_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+                                                    fermentum laoreet.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item">
+                                    <div class="review d-flex flex-row align-items-start justify-content-start">
+                                        <div>
+                                            <div class="review_image"><img src="{% static 'images/review_1.jpg' %}" alt=""></div>
+                                        </div>
+                                        <div class="review_content">
+                                            <div class="review_name">Roberto Sanchez</div>
+                                            <div class="review_rating_container">
+                                                <div class="rating_r rating_r_4 review_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="review_time">2 day ago</div>
+                                            </div>
+                                            <div class="review_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+                                                    fermentum laoreet.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item">
+                                    <div class="review d-flex flex-row align-items-start justify-content-start">
+                                        <div>
+                                            <div class="review_image"><img src="{% static 'images/review_2.jpg' %}" alt=""></div>
+                                        </div>
+                                        <div class="review_content">
+                                            <div class="review_name">Brandon Flowers</div>
+                                            <div class="review_rating_container">
+                                                <div class="rating_r rating_r_4 review_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="review_time">2 day ago</div>
+                                            </div>
+                                            <div class="review_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+                                                    fermentum laoreet.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item">
+                                    <div class="review d-flex flex-row align-items-start justify-content-start">
+                                        <div>
+                                            <div class="review_image"><img src="{% static 'images/review_3.jpg' %}" alt=""></div>
+                                        </div>
+                                        <div class="review_content">
+                                            <div class="review_name">Emilia Clarke</div>
+                                            <div class="review_rating_container">
+                                                <div class="rating_r rating_r_4 review_rating">
+                                                    <i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="review_time">2 day ago</div>
+                                            </div>
+                                            <div class="review_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+                                                    fermentum laoreet.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reviews_dots"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="viewed">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="viewed_title_container">
+                            <h3 class="viewed_title">Recently Viewed</h3>
+                            <div class="viewed_nav_container">
+                                <div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                                <div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
+                            </div>
+                        </div>
+                        <div class="viewed_slider_container">
+
+                            <div class="owl-carousel owl-theme viewed_slider">
+                                {% for featured_product in featured_products %}
+                                <div class="owl-item">
+                                    <div
+                                        class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="{{featured_product.product_photo_main.url}}" alt=""></div>
+                                        <div class="viewed_content text-center">
+                                            <div class="viewed_price">${{featured_product.current_price}}<span>${{featured_product.product_price_before}}</span></div>
+                                            <div class="viewed_name"><a href="{% url 'product_single' id=featured_product.id  %}">{{featured_product.brand_name}}</a></div>
+                                        </div>                                      
+                              
+                                        
+                                    </div>
+                                </div>                         
+                              
+                                {% endfor %}
+                                {% for trends in trend %}
+                                <div class="owl-item">
+                                    <div
+                                        class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="{{trends.product_photo_main.url}}" alt=""></div>
+                                        <div class="viewed_content text-center">
+                                            <div class="viewed_price">${{trends.current_price}}<span>${{trends.product_price_before}}</span></div>
+                                            <div class="viewed_name"><a href="{% url 'single_product_pro' id=trends.id  %}">{{trends.brand_name}}</a></div>
+                                        </div>                                       
+                              
+                                        <ul class="product_marks">                                                                                             
+                                                {% if trends.total_discount == 10 %}                                                                  
+                                                   <li class="product_mark product_discount">-10%</li>
+                                                   {% elif trends.total_discount == 20 %}
+                                                   <li class="product_mark product_discount">-20%</li>
+                                                   {% elif trends.total_discount == 30 %}
+                                                   <li class="product_mark product_discount">-30%</li>
+                                                   {% elif trends.total_discount == 40 %}
+                                                   <li class="product_mark product_discount">-40%</li>
+                                                   {% elif trends.total_discount == 50 %}
+                                                   <li class="product_mark product_discount">-50%</li>                                                                           
+                                                   {% else %}
+                                                   <li class="product_mark product_discount" style="display: none;"></li>
+                                                {% endif %}  
+                                            
+                                            
+                                            </ul>
+                                        </div>
+                                    </div>                
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="brands">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="brands_slider_container">
+                            <div class="owl-carousel owl-theme brands_slider">
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_1.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_2.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_3.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_4.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_5.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_6.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_7.jpg' %}" alt=""></div>
+                                </div>
+                                <div class="owl-item">
+                                    <div class="brands_item d-flex flex-column justify-content-center"><img
+                                            src="{% static 'images/brands_8.jpg' %}" alt=""></div>
+                                </div>
+                            </div>
+
+                            <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
+                            <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="newsletter">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div
+                            class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+                            <div class="newsletter_title_container">
+                                <div class="newsletter_icon"><img src="{% static 'images/send.png' %}" alt=""></div>
+                                <div class="newsletter_title">Sign up for Newsletter</div>
+                                <div class="newsletter_text">
+                                    <p>...and receive %20 coupon for first shopping.</p>
+                                </div>
+                            </div>
+                            <div class="newsletter_content clearfix">
+                                <form action="#" class="newsletter_form">
+                                    <input type="email" class="newsletter_input" required="required"
+                                        placeholder="Enter your email address">
+                                    <button class="newsletter_button">Subscribe</button>
+                                </form>
+                                <div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock midcontent %}
+    {% block footer %}
+    {% include "footer.html" %}
+    {% endblock footer %} 
+  
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/TweenMax.min.js' %}"></script>
+    <script src="{% static 'js/TimelineMax.min.js' %}"></script>
+    <script src="{% static 'js/ScrollMagic.min.js' %}"></script>
+    <script src="{% static 'js/animation.gsap.min.js' %}"></script>
+    <script src="{% static 'js/ScrollToPlugin.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/slick.js' %}"></script>
+    <script src="{% static 'js/easing.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    
+</body>
+
+</html>

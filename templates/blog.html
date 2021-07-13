@@ -1,0 +1,98 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Blog</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="OneTech shop project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/blog_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/blog_responsive.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+
+</head>
+
+<body>
+    {% block blockname %}
+    {% include "header.html" %}
+    {% endblock blockname %}
+    {% block midcontent %}
+      
+    <div class="super_container">
+        <div class="home">
+            <div class="home_background parallax-window" data-parallax="scroll"
+                data-image-src="images/shop_background.jpg"></div>
+            <div class="home_overlay"></div>
+            <div class="home_content d-flex flex-column align-items-center justify-content-center">
+                <h2 class="home_title">Technological Blog</h2>
+            </div>
+        </div>
+
+        <div class="blog">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="blog_posts d-flex flex-row align-items-start justify-content-between">
+                    {% for blogs in blog %}
+                            <div class="blog_post">
+                                <div class="blog_image">
+                                    <img src="{{blogs.image.url}}" alt="" srcset="">
+                                </div>
+                                <div class="blog_text">{{blogs.title}}</div>
+                                <div class="user_details d-flex flex-row align-items-end align-self-end justify-content-between">
+                                    <div class="posted_by">{{blogs.author}}</div>
+                                    <div class="posted_at">{{blogs.created_time}}{{blogs.created_date}}</div>
+                                 </div>
+                                <div class="blog_button"><a href="{% url 'blog_single' id=blogs.id %}">Continue Reading</a></div>
+                            </div>
+                            {% endfor %}                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="newsletter">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div
+                            class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+                            <div class="newsletter_title_container">
+                                <div class="newsletter_icon"><img src="{% static 'images/send.png' %}" alt=""></div>
+                                <div class="newsletter_title">Sign up for Newsletter</div>
+                                <div class="newsletter_text">
+                                    <p>...and receive %20 coupon for first shopping.</p>
+                                </div>
+                            </div>
+                            <div class="newsletter_content clearfix">
+                                <form action="#" class="newsletter_form">
+                                    <input type="email" class="newsletter_input" required="required"
+                                        placeholder="Enter your email address">
+                                    <button class="newsletter_button">Subscribe</button>
+                                </form>
+                                <div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endblock midcontent %}
+    {% block footer %}
+    {% include "footer.html" %}
+    {% endblock footer %}
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/blog_custom.js"></script>
+</body>
+
+</html>

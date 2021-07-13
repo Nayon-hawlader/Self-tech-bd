@@ -1,0 +1,382 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>OneTech</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="OneTech shop project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+ 
+<nav class="navbar navbar-expand-md navbar-dark" style="background-image: linear-gradient(to right, rgb(255 177 0), rgb(255 0 247));">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">
+    <img src="{% static 'images\admin\admin.jpg' %}" width="30" height="30"  class="d-inline-block align-top" alt="" style="border-radius: 20px;">
+    <span class="menu-collapsed">My Bar</span>
+  </a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link text-white" href="/test/">Dashboard <span
+                    class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" id="admin_id">      
+        
+        <li class="nav-item active">
+            <a class="nav-link text-white username_admin" href=""> Welcome,<strong>{{request.user}}</strong></a>      
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link text-white" href="/admin/password_change/">Change password<span
+                    class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="/">View site</a>            
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="/admin/logout/">Logout</a>
+        </li>
+    </ul>
+  </div>
+</nav><!-- NavBar END -->
+
+<!-- Bootstrap row -->
+<div class="row" id="body-row">
+    <!-- Sidebar -->
+    <div id="sidebar-container" class="sidebar-expanded d-none d-md-block"><!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+        <!-- Bootstrap List Group -->
+        <ul class="list-group">
+            <!-- Separator with title -->
+            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                <small>MAIN MENU</small>
+            </li>
+            <!-- /END Separator -->
+            <!-- Menu with submenu -->
+            <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-dashboard fa-fw mr-3"></span> 
+                    <span class="menu-collapsed">Dashboard</span>
+                    <span class="submenu-icon ml-auto"></span>
+                </div>
+            </a>
+            <!-- Submenu content -->
+            <div id='submenu1' class="collapse sidebar-submenu">
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Charts</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Reports</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Tables</span>
+                </a>
+            </div>
+            <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-dashboard fa-fw mr-3"></span> 
+                    <span class="menu-collapsed">Products</span>
+                    <span class="submenu-icon ml-auto"></span>
+                </div>
+            </a>
+            <!-- Submenu content -->
+            <div id='submenu2' class="collapse sidebar-submenu">
+                <a href="/admin/newapp/banner/" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Banner</span>
+                </a>
+                <a href="/admin/newapp/featured_product/" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Featured Products</span>
+                </a>
+                <a href="/admin/newapp/trend/" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Trends</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Reports</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Tables</span>
+                </a>
+            </div>
+            <a href="#submenu3" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-user fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Profile</span>
+                    <span class="submenu-icon ml-auto"></span>
+                </div>
+            </a>
+            <!-- Submenu content -->
+            <div id='submenu3' class="collapse sidebar-submenu">
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed" onclick="myfncr()">Client Ranking</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Settings</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Password</span>
+                </a>
+            </div>            
+            <a href="#" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-tasks fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Tasks</span>    
+                </div>
+            </a>
+            <a href="/admin/newapp/order/" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-tasks fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Orders</span>    
+                </div>
+            </a>
+            <a href="/admin/newapp/oderproduct/" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-tasks fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Order Products</span>    
+                </div>
+            </a>
+            <a href="/admin/newapp/shopcart/" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-tasks fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Shop Cart</span>    
+                </div>
+            </a>            
+            <!-- Separator with title -->
+            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                <small>AUTHORIZATION</small>
+            </li>
+            <!-- /END Separator -->
+            <a href="/admin/auth/group/" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-calendar fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Groups</span>
+                </div>
+            </a>
+            <a href="/admin/auth/user/" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-envelope-o fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Users <span class="badge badge-pill badge-primary ml-2">{{user_count}}</span></span>
+                </div>
+            </a>
+            <!-- Separator with title -->
+            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                <small>OPTIONS</small>
+            </li>
+            <!-- /END Separator -->
+            <a href="/admin/newapp/comment/" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-calendar fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Comment</span>
+                </div>
+            </a>
+            <a href="/admin/newapp/contact/" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-calendar fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Contacts</span>
+                </div>
+            </a>
+            <a href="/admin/newapp/blog/" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-calendar fa-fw mr-3"></span>
+                    <span class="menu-collapsed"> Blogs</span>
+                </div>
+            </a>
+            <a href="/admin/newapp/faq/" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-calendar fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Faq</span>
+                </div>
+            </a>
+            
+            <a href="#" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-calendar fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Calendar</span>
+                </div>
+            </a>
+            <a href="#" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-envelope-o fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Messages <span class="badge badge-pill badge-primary ml-2">5</span></span>
+                </div>
+            </a>
+            <!-- Separator with title -->
+            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                <small>User profiles</small>
+            </li>
+            <!-- /END Separator -->
+            <a href="/admin/UserApp/userprofile/" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-calendar fa-fw mr-3"></span>
+                    <span class="menu-collapsed">User profiles</span>
+                </div>
+            </a>
+            <!-- Separator without title -->
+            <li class="list-group-item sidebar-separator menu-collapsed"></li>            
+            <!-- /END Separator -->
+            <a href="#" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-question fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Help</span>
+                </div>
+            </a>
+            <a href="#" data-toggle="sidebar-colapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span id="collapse-icon" class="fa fa-2x mr-3"></span>
+                    <span id="collapse-text" class="menu-collapsed">Collapse</span>
+                </div>
+            </a>
+            <!-- Logo -->
+            <li class="list-group-item logo-separator d-flex justify-content-center">
+                <img src='https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg' width="30" height="30" />    
+            </li>   
+        </ul><!-- List Group END-->
+    </div><!-- sidebar-container END -->
+
+    <!-- MAIN -->
+    <div class="col">
+        <div id="div_one">
+             {% block blockname %}
+            {% include "all_chart/index_chart.html" %}
+        {% endblock blockname %}
+
+            
+        </div>
+        <div id="div_two" style="display: none;">
+
+            <table class="client_ranking">
+                <tr>
+                    <th>Id</th>
+                   
+                </tr>
+                <tr>{% for nm in nm %}
+                    <td> 
+                    {{nm.user}}          
+                    </td>{% endfor %}
+                 
+                </tr>
+               
+            </table>
+            <table class="client_ranking">
+                <tr>
+                    <th>Firstname</th>
+                   
+                </tr>
+                <tr>{% for n in n %}
+                    <td> 
+                    {{n.first_name}}          
+                    </td>{% endfor %}
+                 
+                </tr>
+               
+            </table>
+            <table class="client_ranking">
+                <tr>           
+                    <th>Total Spent</th>
+                </tr>
+              
+                <tr>
+                  {% for n in n %}
+                  <td>  
+                    {{n.sum}} 
+                 </td>       
+                    {% endfor %}
+                </tr>
+            </table>
+            <table class="client_ranking">
+                <tr>           
+                    <th>Total Buying</th>
+                </tr>
+              
+                <tr>
+                  {% for nn in nn %}
+                  <td>  
+                     {{nn.sum}}
+                 </td>       
+                    {% endfor %}
+                </tr>
+            </table>
+            <table class="client_ranking">
+                <tr>           
+                    <th>Max Buying</th>
+                </tr>
+              
+                <tr>
+                  {% for nnn in nnn %}
+                  <td>  
+                     {{nnn.sum}}
+                 </td>       
+                    {% endfor %}
+                </tr>
+            </table>
+            <table class="client_ranking">
+                <tr>           
+                    <th>Client Ranking On Time</th>
+                </tr>
+              
+                <tr>
+                  {% for n in n %}
+                  <td>  
+                     {% if n.sum >= 2000 %}
+                          <p style="background-color: cornflowerblue;">Top</p>
+                         {% else %} 
+                         <p style="background-color: deepskyblue;padding-left: 10px;">New</p>
+                      {% endif %}    
+                 </td>       
+                    {% endfor %}
+                </tr>
+            </table>
+            <table class="client_ranking">
+                <tr>           
+                    <th>Client Ranking All Time</th>
+                </tr>
+              
+                <tr>
+                  {% for n in n %}
+                  <td>  
+                     {% if n.sum >= 10000 %}
+                          <p style="background-color: gold;">Golden</p>
+                       {% else %}
+                         <p style="background-color: cyan;">Silver</p>
+                     {% endif %}    
+                 </td>       
+                    {% endfor %}
+                </tr>
+            </table>
+            
+        </div>
+       
+
+
+    </div><!-- Main Col END -->
+    
+</div><!-- body-row END -->
+
+    
+
+
+{% for image in m %}
+
+<img src="{{ image.get_image }}" style="width: 50px;height: 50px;">
+
+{% endfor %}
+
+
+
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+
+</html>

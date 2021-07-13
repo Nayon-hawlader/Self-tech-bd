@@ -1,0 +1,91 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user_order_showing.css' %}">
+    <title>show order</title>
+</head>
+<body>
+
+   
+  
+
+{% block blockname %}
+  <h1>{{orders.total}}</h1>
+{% endblock blockname %}
+
+
+
+  <div id="breadcrum" >
+    <div>
+        <ul class="breadcrumb">
+            
+            <li> <a href="{% url 'index' %}">Home</a></li>
+              >>
+            <li class="active">Order card details</li>
+        </ul>
+    </div>
+</div>
+
+  
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+      {{message}}
+    </div>
+      
+    {% endfor %}
+   
+    {% endif %}
+ 
+
+      <div class="table-container">
+        <table>
+          <tr>                 
+            <th>Product photo</th> 
+            <th>Brand name</th> 
+            <th>Product quantity</th> 
+            <th>Per price</th>             
+            <th>Total amount</th>
+            <th>Action</th>
+          </tr>
+        </table>
+        {% for p in cart_product %} 
+        <table>        
+          <tr>                 
+            <td> <img src="{{p.product.product_photo_main.url}}" alt=""></td>
+            <td>{{p.product.brand_name}}</td>
+            <td>{{p.quantity}}</td>
+            <td>{{p.price}}</td>            
+            <td>{{p.amount}}</td>
+            <td><a href="{% url 'cart_delete' id=p.id%}">Delete product</a></td>
+          </tr>
+          
+        </table>
+          {% endfor %}    
+          <table class="total-table">
+            <tr>
+              <th class="bg-transparent"></th>  
+              <th class="bg-transparent"> </th>
+              <th>Total quantity</th>                  
+              <th></th>  
+              <th>Total amount</th>  
+              <th class="bg-transparent"></th>  
+            </tr>
+            <tr>
+              <td class="bg-transparent"></td>  
+              <td class="bg-transparent"></td>  
+              <td class="total-products">{{total_products}}</td>  
+              <td class="bg-transparent"></td>  
+              <td class="total-amount">{{total_amount}}</td>  
+            </tr>
+          </table>   
+      </div>
+ 
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/recent_view.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+
+</head>
+<body>
+    <div class="viewed">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="viewed_title_container">
+                        <h3 class="viewed_title">Recently Viewed</h3>
+                        <div class="viewed_nav_container">
+                            <div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                            <div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="viewed_slider_container">
+
+                        <div class="owl-carousel owl-theme viewed_slider">
+                            {% for featured_product in featured_products %}
+                            <div class="owl-item">
+                                <div
+                                    class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                    <div class="viewed_image"><img src="{{featured_product.product_photo_main.url}}" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">${{featured_product.current_price}}<span>${{featured_product.product_price_before}}</span></div>
+                                        <div class="viewed_name"><a href="{% url 'product_single' id=featured_product.id  %}">{{featured_product.brand_name}}</a></div>
+                                    </div>                                       
+                        
+                                </div>
+                            </div>                         
+                          
+                            {% endfor %}
+                            {% for trends in trend %}
+                            <div class="owl-item">
+                                <div
+                                    class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                    <div class="viewed_image"><img src="{{trends.product_photo_main.url}}" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">${{trends.current_price}}<span>${{trends.product_price_before}}</span></div>
+                                        <div class="viewed_name"><a href="{% url 'single_product_pro' id=trends.id  %}">{{trends.brand_name}}</a></div>
+                                    </div>                                      
+                          
+                                    
+                                    </div>
+                                </div>                
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+   
+    
+</body>
+</html>
