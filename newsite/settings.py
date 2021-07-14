@@ -4,6 +4,7 @@ import dj_database_url
 import django_heroku
 from decouple import config
 
+import cloudinary_storage
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -36,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'newapp',
-    'UserApp'
+    'UserApp',
+    'cloudinary_storage',
+    'cloudinary',
+    'django_cleanup.apps.CleanupConfig',
+
+
    
 
     
@@ -149,7 +155,11 @@ STATICFILES_FINDERS = (
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dea7a5vak',
+    'API_KEY': '947582322412293',
+    'API_SECRET': '_p1csJPbQpE7odhzxHY0-Z2s024'
+}
 
 django_heroku.settings(locals())
