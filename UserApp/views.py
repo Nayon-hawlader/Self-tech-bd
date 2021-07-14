@@ -46,7 +46,7 @@ def user_register(request):
             current_user = request.user
             data = UserProfile()
             data.user_id = current_user.id
-            data.image = "user_img/avatar.png"
+            data.image = "user_img/popular_5.png"
             data.save()
 
             return redirect('index')

@@ -418,17 +418,18 @@ class OderProduct(models.Model):
     def short_description(self):
         return truncatechars(self.product, 35)
  
-    def save(self, *args, **kwargs):
-        qrcode_img = qrcode.make(self.qr_name)
-        canvas = Image.new('RGB', (290, 290), 'white')
-        draw = ImageDraw.Draw(canvas)
-        canvas.paste(qrcode_img)
-        fname = f'qr_code-{self.qr_name}.png'
-        buffer = BytesIO()
-        canvas.save(buffer, 'PNG')
-        self.qr_code.save(fname, File(buffer), save = False)
-        canvas.close()
-        super().save(*args, **kwargs)
+    #generate qrcode but cloudinary not support this for the reason i put this under comment
+    # def save(self, *args, **kwargs):
+    #     qrcode_img = qrcode.make(self.qr_name)
+    #     canvas = Image.new('RGB', (290, 290), 'white')
+    #     draw = ImageDraw.Draw(canvas)
+    #     canvas.paste(qrcode_img)
+    #     fname = f'qr_code-{self.qr_name}.jpg'
+    #     buffer = BytesIO()
+    #     canvas.save(buffer, 'PNG')
+    #     self.qr_code.save(fname, File(buffer), save = False)
+    #     canvas.close()
+    #     super().save(*args, **kwargs)
 
     def get_image(self):
         if self.qr_code and hasattr(self.qr_code, 'url'):
