@@ -15,7 +15,7 @@ class UserProfile(models.Model):
     image=models.ImageField(blank=True, upload_to="user_img")
 
     def __str__(self):
-        return f'{self.id}{self.user.username}{self.phone}{self.address}'
+        return f'{self.id}{self.user.username}{self.phone}{self.address}{self.image}'
        
     def user_name(self):
         return self.user.first_name+' '+self.user.last_name+'['+self.user.username+']'

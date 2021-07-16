@@ -13,7 +13,7 @@ import qrcode
 from io import BytesIO
 from django.core.files import File
 from PIL import Image, ImageDraw
-from django_cleanup import cleanup
+from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect, reverse ,get_object_or_404
 
 
 
@@ -117,13 +117,22 @@ class Featured_product(models.Model):
 
     
 
-
     
+ 
         
 
     @property
     def short_description(self):
         return truncatechars(self.product_description, 35)
+
+
+
+
+
+
+
+
+
 
     def total_review(self):
         reviews = Comment.objects.filter(
@@ -244,7 +253,7 @@ class ShopCart(models.Model):
     quantity = models.IntegerField()
     amount= models.IntegerField()    
     section = models.CharField(max_length=15, blank=True)  
-    product_photo_main = models.ImageField(("shopcart_image"),upload_to='shopcart_image', default='trends_photo/best_5.png')
+    product_photo_main = models.ImageField(upload_to='shopcart_image', default='trends_photo/best_5.png')
     product_add_date_time = models.DateTimeField(auto_now_add=True, null=True)
     
 
@@ -302,7 +311,7 @@ class Order(models.Model):
     create_date = models.DateField(auto_now_add=True,)
     update_at = models.DateTimeField(auto_now=True)
     gift = models.BooleanField(default=False)
-    product_photo_main = models.ImageField(("order_image"),upload_to='order_image', default='trends_photo/best_5.png')
+    product_photo_main = models.ImageField(upload_to='order_image', default='trends_photo/best_5.png')
     email = models.EmailField(max_length = 254, default="nayonhawlader.bd@gmail.com")
 
     
@@ -385,7 +394,7 @@ class OderProduct(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     color =models.CharField(max_length=20,default='Default')
-    product_photo_main = models.ImageField(("order_product_image"),upload_to='order_product_image', default='trends_photo/best_5.png')
+    product_photo_main = models.ImageField(upload_to='order_product_image', default='trends_photo/best_5.png')
     brand_name =models.CharField(max_length=20, blank=True)
     section =models.CharField(max_length=20,default='')
     qr_name = models.CharField(max_length=200, blank=True)

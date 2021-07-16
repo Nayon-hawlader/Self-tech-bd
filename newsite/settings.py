@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'UserApp',
     'cloudinary_storage',
     'cloudinary',
-    'django_cleanup.apps.CleanupConfig',
+  
 
 
    
